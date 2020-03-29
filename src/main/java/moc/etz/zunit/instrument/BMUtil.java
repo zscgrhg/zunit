@@ -6,6 +6,7 @@ import com.sun.jna.Native;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.tools.attach.AgentInitializationException;
 import lombok.SneakyThrows;
+import moc.etz.zunit.util.JsonUtil;
 import org.jboss.byteman.agent.install.Install;
 import org.jboss.byteman.agent.submit.ScriptText;
 import org.jboss.byteman.agent.submit.Submit;
@@ -91,12 +92,14 @@ public class BMUtil {
     @SneakyThrows
     public static void submitText(List<ScriptText> scripts) {
         Submit submit = new Submit(getHost(), getPort());
+        LOGGER.debug("submit" + JsonUtil.write(scripts));
         submit.addScripts(scripts);
     }
 
     @SneakyThrows
     public static void unloadText(List<ScriptText> scripts) {
         Submit submit = new Submit(getHost(), getPort());
+        LOGGER.debug("unload" + JsonUtil.write(scripts));
         submit.deleteScripts(scripts);
     }
 

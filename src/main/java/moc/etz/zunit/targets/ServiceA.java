@@ -1,8 +1,14 @@
 package moc.etz.zunit.targets;
 
-import java.util.List;
-import java.util.Set;
+import moc.etz.zunit.parse.annotation.TestSubject;
 
+import java.util.List;
+
+@TestSubject
 public interface ServiceA {
-    List<Set<String>> hello(List<Set<HelloEntity<String>>> p);
+
+
+    List<HelloEntity<String>> hello(int x, List<String> arg2);
+
+    Object[] arrayTest(String[] p);
 }

@@ -1,0 +1,9 @@
+RULE exit:public java.lang.Object
+CLASS ^moc.etz.zunit.targets.ServiceAImpl
+METHOD  arrayTest(java.lang.String[])
+AT EXIT
+BIND    mid:java.lang.Long=java.lang.Long.valueOf(11L);
+IF true
+DO
+    System.out.println(mid);
+ENDRULE
