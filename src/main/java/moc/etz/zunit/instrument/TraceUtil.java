@@ -21,6 +21,9 @@ public class TraceUtil {
         List<ScriptText> scriptTexts = new ArrayList<>();
         Method[] methods = clazz.getDeclaredMethods();
         for (Method method : methods) {
+            if (method.isSynthetic()) {
+                continue;
+            }
             MethodNames names = MethodNames.build(method);
             {
 
