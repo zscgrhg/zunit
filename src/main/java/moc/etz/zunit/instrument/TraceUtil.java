@@ -26,7 +26,7 @@ public class TraceUtil {
 
                 BMRuleMustacheModel model = BMRuleMustacheModel.atEntry(names, true);
                 model.setHelper(TraceHelper.class);
-                model.addAction("atEntry(_mid_,$*);");
+                model.addAction(MustacheUtil.format("atEntry({{0}},$*);", MethodNames.BIND_NAME));
                 String rule = MustacheUtil.render(model);
                 ScriptText scriptText = new ScriptText(model.ruleId, rule);
                 scriptTexts.add(scriptText);
@@ -34,7 +34,7 @@ public class TraceUtil {
             {
                 BMRuleMustacheModel model = BMRuleMustacheModel.atExit(names, true);
                 model.setHelper(TraceHelper.class);
-                model.addAction("atExit(_mid_,$*,$!);");
+                model.addAction(MustacheUtil.format("atExit({{0}},$*,$!);", MethodNames.BIND_NAME));
                 String rule = MustacheUtil.render(model);
                 ScriptText scriptText = new ScriptText(model.ruleId, rule);
                 scriptTexts.add(scriptText);
@@ -42,7 +42,7 @@ public class TraceUtil {
             {
                 BMRuleMustacheModel model = BMRuleMustacheModel.atException(names, true);
                 model.setHelper(TraceHelper.class);
-                model.addAction("atException(_mid_,$*,$^);");
+                model.addAction(MustacheUtil.format("atException({{0}},$*,$^);", MethodNames.BIND_NAME));
                 String rule = MustacheUtil.render(model);
                 ScriptText scriptText = new ScriptText(model.ruleId, rule);
                 scriptTexts.add(scriptText);

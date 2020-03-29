@@ -27,7 +27,7 @@ public class BMRuleMustacheModel {
         model.ruleId = ruleId;
         String targetClass = MustacheUtil.format("{{0}} {{#1}}^{{/1}}{{2}}", names.ownerType, override, names.ownerName);
         model.targetClass = targetClass;
-        model.addBind(MustacheUtil.format("_mid_:java.lang.Long=java.lang.Long.valueOf({{0}}L)", names.mid));
+        model.addBind(MustacheUtil.format("{{0}}:java.lang.Long=java.lang.Long.valueOf({{1}}L)", MethodNames.BIND_NAME, names.mid));
         model.targetMethod = names.signature;
         return model;
     }

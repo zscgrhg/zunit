@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MethodNames {
     public static final AtomicLong NAMES_INCR = new AtomicLong(1);
     public static final Map<Long, MethodNames> METHOD_NAMES_MAP = new ConcurrentHashMap<>();
-
+    public static final String BIND_NAME = "_moc_etz_zunit_instrument_MethodNames_mid_";
     @JsonIgnore
     public final Long mid = NAMES_INCR.getAndIncrement();
     public final String ownerName;
