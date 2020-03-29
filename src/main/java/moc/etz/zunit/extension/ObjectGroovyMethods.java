@@ -1,4 +1,4 @@
-package moc.etz.zunit.method;
+package moc.etz.zunit.extension;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import moc.etz.zunit.util.JsonUtil;
