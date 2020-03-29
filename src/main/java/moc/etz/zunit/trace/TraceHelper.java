@@ -21,7 +21,8 @@ public class TraceHelper {
         LOGGER.debug(mid + " : " + JsonUtil.write(args) + ",trigger by " + rule.getName());
         InvocationContext context = InvocationContext.getCurrent(true);
         if (context.canPush()) {
-            Invocation invocation = new Invocation(mid);
+            Invocation invocation = new Invocation();
+            invocation.mid = mid;
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
             MethodNames names = MethodNames.METHOD_NAMES_MAP.get(mid);
             invocation.setMethod(names.name);

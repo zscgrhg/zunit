@@ -30,7 +30,7 @@ public class InvocationContext {
     public final Long id = CXT_INCR.getAndIncrement();
     @JsonIgnore
     public final Map<Long, Invocation> map = new ConcurrentHashMap<>();
-    final ParamWriter paramWriter = new ParamWriterImpl();
+    final TraceWriter traceWriter = new TraceWriterImpl();
 
     public static InvocationContext getCurrent(boolean create) {
         InvocationContext current = CONTEXT.get();
@@ -101,7 +101,7 @@ public class InvocationContext {
         p.argsType = ParamModel.valuesTypeOf(args);
         p.invocationId = invocation.id;
         p.name = ParamModel.INPUTS;
-        paramWriter.write(p);
+        traceWriter.write(p);
     }
 
     public void pop(Object[] args, Object returnValue, Throwable exception) {
@@ -121,11 +121,11 @@ public class InvocationContext {
             p.exception = exception.getClass().getName();
         }
         p.name = ParamModel.OUTPUTS;
-        paramWriter.write(p);
+        traceWriter.write(p);
         pop.finished = true;
 
         if (stack.isEmpty()) {
-            paramWriter.write(this);
+            traceWriter.write(this);
             CONTEXT.remove();
             PREVIOUS.remove();
             Invocation prevTTL = STAGED.get();

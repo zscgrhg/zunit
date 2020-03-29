@@ -28,8 +28,8 @@ public class Invocation {
     public static final AtomicLong INVOCATION_INCR = new AtomicLong(1);
 
     public final Long id = INVOCATION_INCR.getAndIncrement();
-    public final long threadId;
-    public final Long mid;
+    public final long threadId = Thread.currentThread().getId();
+    public Long mid;
     @JsonIgnore
     public final Map<Object, RefsInfo> refs = new HashMap<>();
     public final List<Invocation> children = new CopyOnWriteArrayList<>();
@@ -43,13 +43,6 @@ public class Invocation {
     public volatile boolean finished = false;
     @JsonIgnore
     Invocation parent;
-
-    public Invocation(Long mid) {
-        this.mid = mid;
-        this.threadId = Thread.currentThread().getId();
-    }
-
-
     @SneakyThrows
     public void saveObjectsRef(String methodSignure, Object[] args) {
         try {
