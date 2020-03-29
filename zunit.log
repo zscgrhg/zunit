@@ -1,6 +1,6 @@
-18:03:09.515 [main] DEBUG moc.etz.zunit.instrument.BMUtil - CurrentProcessId=20448
-18:03:09.515 [main] DEBUG moc.etz.zunit.instrument.BMUtil - CurrentProcessId=20448
-18:03:10.117 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
+18:55:38.817 [main] DEBUG moc.etz.zunit.instrument.BMUtil - CurrentProcessId=20524
+18:55:38.817 [main] DEBUG moc.etz.zunit.instrument.BMUtil - CurrentProcessId=20524
+18:55:39.447 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
   "fileName" : "entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)",
   "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)\r\nINTERFACE ^moc.etz.zunit.targets.ServiceA\r\nMETHOD  hello(int,java.util.List)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(1L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
 }, {
@@ -19,7 +19,7 @@
   "fileName" : "exception:public abstract java.lang.Object[] moc.etz.zunit.targets.ServiceA.arrayTest(java.lang.String[])",
   "text" : "RULE exception:public abstract java.lang.Object[] moc.etz.zunit.targets.ServiceA.arrayTest(java.lang.String[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceA\r\nMETHOD  arrayTest(java.lang.String[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(2L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
 } ]
-18:03:10.117 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
+18:55:39.447 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
   "fileName" : "entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)",
   "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)\r\nINTERFACE ^moc.etz.zunit.targets.ServiceA\r\nMETHOD  hello(int,java.util.List)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(1L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
 }, {
@@ -38,7 +38,7 @@
   "fileName" : "exception:public abstract java.lang.Object[] moc.etz.zunit.targets.ServiceA.arrayTest(java.lang.String[])",
   "text" : "RULE exception:public abstract java.lang.Object[] moc.etz.zunit.targets.ServiceA.arrayTest(java.lang.String[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceA\r\nMETHOD  arrayTest(java.lang.String[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(2L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
 } ]
-18:03:10.178 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
+18:55:39.515 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
   "fileName" : "entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)",
   "text" : "RULE entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  hello(int,java.util.List)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(3L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
 }, {
@@ -57,16 +57,34 @@
   "fileName" : "exception:public java.lang.Object[] moc.etz.zunit.targets.ServiceAImpl.arrayTest(java.lang.String[])",
   "text" : "RULE exception:public java.lang.Object[] moc.etz.zunit.targets.ServiceAImpl.arrayTest(java.lang.String[])\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  arrayTest(java.lang.String[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(4L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
 }, {
-  "fileName" : "entry:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)",
-  "text" : "RULE entry:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
+  "fileName" : "entry:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)",
+  "text" : "RULE entry:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$2(int,java.lang.Integer)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
 }, {
-  "fileName" : "exit:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)",
-  "text" : "RULE exit:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
+  "fileName" : "exit:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)",
+  "text" : "RULE exit:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$2(int,java.lang.Integer)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
 }, {
-  "fileName" : "exception:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)",
-  "text" : "RULE exception:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
+  "fileName" : "exception:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)",
+  "text" : "RULE exception:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$2(int,java.lang.Integer)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
+}, {
+  "fileName" : "entry:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)",
+  "text" : "RULE entry:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$null$1(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
+}, {
+  "fileName" : "exit:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)",
+  "text" : "RULE exit:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$null$1(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
+}, {
+  "fileName" : "exception:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)",
+  "text" : "RULE exception:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$null$1(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
+}, {
+  "fileName" : "entry:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)",
+  "text" : "RULE entry:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(7L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
+}, {
+  "fileName" : "exit:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)",
+  "text" : "RULE exit:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(7L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
+}, {
+  "fileName" : "exception:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)",
+  "text" : "RULE exception:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(7L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
 } ]
-18:03:10.178 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
+18:55:39.515 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
   "fileName" : "entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)",
   "text" : "RULE entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  hello(int,java.util.List)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(3L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
 }, {
@@ -85,54 +103,108 @@
   "fileName" : "exception:public java.lang.Object[] moc.etz.zunit.targets.ServiceAImpl.arrayTest(java.lang.String[])",
   "text" : "RULE exception:public java.lang.Object[] moc.etz.zunit.targets.ServiceAImpl.arrayTest(java.lang.String[])\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  arrayTest(java.lang.String[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(4L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
 }, {
-  "fileName" : "entry:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)",
-  "text" : "RULE entry:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
+  "fileName" : "entry:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)",
+  "text" : "RULE entry:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$2(int,java.lang.Integer)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
 }, {
-  "fileName" : "exit:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)",
-  "text" : "RULE exit:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
+  "fileName" : "exit:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)",
+  "text" : "RULE exit:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$2(int,java.lang.Integer)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
 }, {
-  "fileName" : "exception:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)",
-  "text" : "RULE exception:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
+  "fileName" : "exception:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)",
+  "text" : "RULE exception:private java.util.stream.Stream moc.etz.zunit.targets.ServiceAImpl.lambda$hello$2(int,java.lang.Integer)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$2(int,java.lang.Integer)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
+}, {
+  "fileName" : "entry:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)",
+  "text" : "RULE entry:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$null$1(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
+}, {
+  "fileName" : "exit:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)",
+  "text" : "RULE exit:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$null$1(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
+}, {
+  "fileName" : "exception:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)",
+  "text" : "RULE exception:private static moc.etz.zunit.targets.HelloEntity moc.etz.zunit.targets.ServiceAImpl.lambda$null$1(int,java.lang.String)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$null$1(int,java.lang.String)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
+}, {
+  "fileName" : "entry:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)",
+  "text" : "RULE entry:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(7L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
+}, {
+  "fileName" : "exit:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)",
+  "text" : "RULE exit:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(7L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
+}, {
+  "fileName" : "exception:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)",
+  "text" : "RULE exception:private static java.lang.Integer moc.etz.zunit.targets.ServiceAImpl.lambda$hello$0(int)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  lambda$hello$0(int)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(7L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
 } ]
-18:03:10.231 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
+18:55:39.570 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
   "fileName" : "entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
-  "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
+  "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(8L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
 }, {
   "fileName" : "exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
-  "text" : "RULE exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
+  "text" : "RULE exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(8L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
 }, {
   "fileName" : "exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
-  "text" : "RULE exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
+  "text" : "RULE exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(8L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
 } ]
-18:03:10.231 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
+18:55:39.570 [main] DEBUG moc.etz.zunit.instrument.BMUtil - submit[ {
   "fileName" : "entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
-  "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
+  "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(8L)\r\nIF true\r\nDO\r\n    atEntry(_mid_,$*);\r\nENDRULE"
 }, {
   "fileName" : "exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
-  "text" : "RULE exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
+  "text" : "RULE exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(8L)\r\nIF true\r\nDO\r\n    atExit(_mid_,$*,$!);\r\nENDRULE"
 }, {
   "fileName" : "exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
-  "text" : "RULE exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(6L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
+  "text" : "RULE exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _mid_:java.lang.Long=java.lang.Long.valueOf(8L)\r\nIF true\r\nDO\r\n    atException(_mid_,$*,$^);\r\nENDRULE"
 } ]
-18:03:10.261 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 1 : [ { }, 3, [ "a", "b", "c" ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
-18:03:10.261 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 1 : [ { }, 3, [ "a", "b", "c" ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
-18:03:10.270 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryIncr true
-18:03:10.270 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryIncr true
-18:03:10.295 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 3 : [ { }, 3, [ "a", "b", "c" ] ],trigger by entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
-18:03:10.295 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 3 : [ { }, 3, [ "a", "b", "c" ] ],trigger by entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
-18:03:10.295 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryIncr false
-18:03:10.295 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryIncr false
-18:03:10.297 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 6 : [ { }, [ 3, 4, 5 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-18:03:10.297 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 6 : [ { }, [ 3, 4, 5 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-18:03:10.297 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryIncr true
-18:03:10.297 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryIncr true
-18:03:10.308 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 6 : [ { }, [ 3, 4, 5 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-18:03:10.308 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 6 : [ { }, [ 3, 4, 5 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-18:03:10.308 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryMinus true
-18:03:10.308 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryMinus true
-18:03:10.312 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 3 : [ { }, 3, [ "a", "b", "c" ] ],trigger by exit:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
-18:03:10.312 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 3 : [ { }, 3, [ "a", "b", "c" ] ],trigger by exit:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
-18:03:10.312 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryMinus true
-18:03:10.312 [main] DEBUG m.etz.zunit.trace.InvocationContext - entryMinus true
-18:03:10.323 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 1 : [ { }, 3, [ "a", "b", "c" ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
-18:03:10.323 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 1 : [ { }, 3, [ "a", "b", "c" ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
+18:55:39.598 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
+18:55:39.598 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
+18:55:39.607 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.607 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.652 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
+18:55:39.652 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
+18:55:39.652 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPush :false
+18:55:39.652 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPush :false
+18:55:39.671 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 3 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.671 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 2 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.671 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 1 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.671 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 4 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.671 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 3 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.671 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 1 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.671 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 2 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.671 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.671 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.671 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.671 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.671 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.671 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.672 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext - stage:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.672 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext - stage:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.671 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 4 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.672 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext - stage:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.672 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.672 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext - stage:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.672 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext - canPush :true
+18:55:39.672 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext - stage:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.672 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext - stage:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.680 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 4 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.680 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 1 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.680 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 3 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.680 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 1 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.680 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 2 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.680 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 3 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.680 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 2 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.680 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper - 8 : [ { }, [ 4 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+18:55:39.680 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.680 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.680 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.680 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.680 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.680 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.681 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.681 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.684 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.684 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.684 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.684 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.684 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.684 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+18:55:39.686 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
+18:55:39.686 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
+18:55:39.687 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.687 [main] DEBUG m.etz.zunit.trace.InvocationContext - canPop :true
+18:55:39.697 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
+18:55:39.697 [main] DEBUG moc.etz.zunit.trace.TraceHelper - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)

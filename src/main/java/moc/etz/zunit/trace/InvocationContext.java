@@ -44,7 +44,7 @@ public class InvocationContext {
         return invocation.threadId == Thread.currentThread().getId();
     }
 
-    public boolean entryIncr() {
+    public boolean canPush() {
         long prev = ENTRY_COUNTER.get();
         int length = Thread.currentThread().getStackTrace().length;
         boolean success = false;
@@ -53,11 +53,11 @@ public class InvocationContext {
             EXIT_COUNTER.set(Integer.MAX_VALUE);
             success = true;
         }
-        LOGGER.debug("entryIncr " + success);
+        LOGGER.debug("canPush :" + success);
         return success;
     }
 
-    public boolean entryMinus() {
+    public boolean canPop() {
         long prev = EXIT_COUNTER.get();
         int length = Thread.currentThread().getStackTrace().length;
         boolean success = false;
@@ -66,7 +66,7 @@ public class InvocationContext {
             ENTRY_COUNTER.set(Integer.MIN_VALUE);
             success = true;
         }
-        LOGGER.debug("entryMinus " + success);
+        LOGGER.debug("canPop :" + success);
         return success;
     }
 

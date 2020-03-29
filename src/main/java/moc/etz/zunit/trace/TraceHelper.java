@@ -20,7 +20,7 @@ public class TraceHelper {
     public void atEntry(Long mid, Object[] args) {
         LOGGER.debug(mid + " : " + JsonUtil.write(args) + ",trigger by " + rule.getName());
         InvocationContext context = InvocationContext.getCurrent(true);
-        if (context.entryIncr()) {
+        if (context.canPush()) {
             Invocation invocation = new Invocation(mid);
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
             MethodNames names = MethodNames.METHOD_NAMES_MAP.get(mid);
@@ -37,7 +37,7 @@ public class TraceHelper {
     public void atExit(Long mid, Object[] args, Object ret) {
         LOGGER.debug(mid + " : " + JsonUtil.write(args) + ",trigger by " + rule.getName());
         InvocationContext context = InvocationContext.getCurrent(false);
-        if (context != null && context.entryMinus()) {
+        if (context != null && context.canPop()) {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
             context.pop(methodArgs, ret, null);
         }
@@ -46,7 +46,7 @@ public class TraceHelper {
     public void atException(Long mid, Object[] args, Throwable t) {
         LOGGER.debug(mid + " : " + JsonUtil.write(args) + ",trigger by " + rule.getName());
         InvocationContext context = InvocationContext.getCurrent(false);
-        if (context != null && context.entryMinus()) {
+        if (context != null && context.canPop()) {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
             context.pop(methodArgs, null, t);
         }

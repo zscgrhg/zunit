@@ -12,7 +12,9 @@ public class Main {
         BMUtil.loadAgent();
         //BMUtil.submitFile("C:\\data\\moc.etz\\src\\main\\resources\\btm\\hello.btm");
         SubjectManager.getInstance().loadFromPkg("moc.etz.zunit.targets");
+
+
         ServiceA serviceA = new ServiceAImpl();
-        serviceA.hello(3, Arrays.asList("a", "b", "c"));
+        serviceA.hello(5, Arrays.asList("a", "b", "c"));
     }
 }
