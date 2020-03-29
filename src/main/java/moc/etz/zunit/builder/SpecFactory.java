@@ -170,7 +170,12 @@ public class SpecFactory {
         }
         if (defs.size() > 1 && genericSignature != null && !genericSignature.isEmpty()) {
             GroovyLine groovyLine = defs.get(defs.size() - 1);
-            groovyLine.tokens = MustacheUtil.format("{{0}} as {{1}}", groovyLine.tokens, genericSignature);
+            if (genericSignature.contains("<")) {
+                groovyLine.tokens = MustacheUtil.format("{{0}}.reconstruction(new TypeReference<{{1}}>(){})", groovyLine.tokens, genericSignature);
+            } else {
+                groovyLine.tokens = MustacheUtil.format("{{0}} as {{1}}", groovyLine.tokens, genericSignature);
+            }
+
         }
 
         return defs;

@@ -1,16 +1,22 @@
-package com.etz.pkg20200329224459
+package com.etz.pkg20200329232710
 
-import spock.lang.Specification;
-
+import com.fasterxml.jackson.core.type.TypeReference
+import spock.lang.Specification
 
 class ServiceAImplhello1Spec extends Specification {
 	void verifyhello() {
 		given:
 			def subject = new moc.etz.zunit.targets.ServiceAImpl()
+			subject.serviceB = Mock(moc.etz.zunit.targets.ServiceBImpl) {
+				1 * doServiceB(INPUTS2[0]) >> RETURNED2
+				1 * doServiceB(INPUTS3[0]) >> RETURNED3
+				1 * doServiceB(INPUTS4[0]) >> RETURNED4
+				1 * doServiceB(INPUTS5[0]) >> RETURNED5
+			}
 		when:
-			1 == 1
+			def ret = subject.hello(*INPUTS1)
 		then:
-			1 == 1
+			ret == RETURNED1
 	}
 	
 	
@@ -20,7 +26,7 @@ class ServiceAImplhello1Spec extends Specification {
 					'a',
 					'b',
 					'c'
-			] as java.util.List<java.lang.String>
+			].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	]
 	static final def INPUTS2 = [
 			[
@@ -49,7 +55,7 @@ class ServiceAImplhello1Spec extends Specification {
 					'a',
 					'b',
 					'c'
-			] as java.util.List<java.lang.String>
+			].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	]
 	static final def OUTPUTS2 = [
 			[
@@ -93,23 +99,27 @@ class ServiceAImplhello1Spec extends Specification {
 					counter: 5,
 					data   : '4'
 			]
-	] as java.util.List<moc.etz.zunit.targets.HelloEntity<java.lang.String>>
+	].reconstruction(new TypeReference<java.util.List<moc.etz.zunit.targets.HelloEntity<java.lang.String>>>() {})
 	;
+	
 	static final def RETURNED2 = [
 			'3',
-	] as java.util.List<java.lang.String>
+	].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	;
+	
 	static final def RETURNED3 = [
 			'2',
-	] as java.util.List<java.lang.String>
+	].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	;
+	
 	static final def RETURNED4 = [
 			'1',
-	] as java.util.List<java.lang.String>
+	].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	;
+	
 	static final def RETURNED5 = [
 			'4',
-	] as java.util.List<java.lang.String>
+	].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	;
 	
 	

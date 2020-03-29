@@ -1,5 +1,6 @@
 package moc.etz.zunit.util;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -25,4 +26,8 @@ public class JsonUtil {
         return MAPPER.readerFor(Invocation.class).readValue(bytes);
     }
 
+    @SneakyThrows
+    public static <T> T readerFor(TypeReference<T> tTypeReference, String data) {
+        return MAPPER.readerFor(tTypeReference).readValue(data);
+    }
 }
