@@ -1,6 +1,6 @@
-2020-03-29 23:27:09.214 [main] DEBUG moc.etz.zunit.instrument.BMUtil.getPid(39) - CurrentProcessId=10528
-2020-03-29 23:27:09.214 [main] DEBUG moc.etz.zunit.instrument.BMUtil.getPid(39) - CurrentProcessId=10528
-2020-03-29 23:27:09.806 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
+2020-03-29 23:37:34.379 [main] DEBUG moc.etz.zunit.instrument.BMUtil.getPid(39) - CurrentProcessId=3624
+2020-03-29 23:37:34.379 [main] DEBUG moc.etz.zunit.instrument.BMUtil.getPid(39) - CurrentProcessId=3624
+2020-03-29 23:37:35.000 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
   "fileName" : "entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)",
   "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)\r\nINTERFACE ^moc.etz.zunit.targets.ServiceA\r\nMETHOD  hello(int,java.util.List)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(1L)\r\nIF true\r\nDO\r\n    atEntry(_moc_etz_zunit_instrument_MethodNames_mid_,$*);\r\nENDRULE"
 }, {
@@ -19,7 +19,7 @@
   "fileName" : "exception:public abstract java.lang.Object[] moc.etz.zunit.targets.ServiceA.arrayTest(java.lang.String[])",
   "text" : "RULE exception:public abstract java.lang.Object[] moc.etz.zunit.targets.ServiceA.arrayTest(java.lang.String[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceA\r\nMETHOD  arrayTest(java.lang.String[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(2L)\r\nIF true\r\nDO\r\n    atException(_moc_etz_zunit_instrument_MethodNames_mid_,$*,$^);\r\nENDRULE"
 } ]
-2020-03-29 23:27:09.806 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
+2020-03-29 23:37:35.000 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
   "fileName" : "entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)",
   "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)\r\nINTERFACE ^moc.etz.zunit.targets.ServiceA\r\nMETHOD  hello(int,java.util.List)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(1L)\r\nIF true\r\nDO\r\n    atEntry(_moc_etz_zunit_instrument_MethodNames_mid_,$*);\r\nENDRULE"
 }, {
@@ -38,7 +38,7 @@
   "fileName" : "exception:public abstract java.lang.Object[] moc.etz.zunit.targets.ServiceA.arrayTest(java.lang.String[])",
   "text" : "RULE exception:public abstract java.lang.Object[] moc.etz.zunit.targets.ServiceA.arrayTest(java.lang.String[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceA\r\nMETHOD  arrayTest(java.lang.String[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(2L)\r\nIF true\r\nDO\r\n    atException(_moc_etz_zunit_instrument_MethodNames_mid_,$*,$^);\r\nENDRULE"
 } ]
-2020-03-29 23:27:09.870 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
+2020-03-29 23:37:35.059 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
   "fileName" : "entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)",
   "text" : "RULE entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  hello(int,java.util.List)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(3L)\r\nIF true\r\nDO\r\n    atEntry(_moc_etz_zunit_instrument_MethodNames_mid_,$*);\r\nENDRULE"
 }, {
@@ -57,7 +57,7 @@
   "fileName" : "exception:public java.lang.Object[] moc.etz.zunit.targets.ServiceAImpl.arrayTest(java.lang.String[])",
   "text" : "RULE exception:public java.lang.Object[] moc.etz.zunit.targets.ServiceAImpl.arrayTest(java.lang.String[])\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  arrayTest(java.lang.String[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(4L)\r\nIF true\r\nDO\r\n    atException(_moc_etz_zunit_instrument_MethodNames_mid_,$*,$^);\r\nENDRULE"
 } ]
-2020-03-29 23:27:09.870 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
+2020-03-29 23:37:35.059 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
   "fileName" : "entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)",
   "text" : "RULE entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  hello(int,java.util.List)\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(3L)\r\nIF true\r\nDO\r\n    atEntry(_moc_etz_zunit_instrument_MethodNames_mid_,$*);\r\nENDRULE"
 }, {
@@ -76,7 +76,7 @@
   "fileName" : "exception:public java.lang.Object[] moc.etz.zunit.targets.ServiceAImpl.arrayTest(java.lang.String[])",
   "text" : "RULE exception:public java.lang.Object[] moc.etz.zunit.targets.ServiceAImpl.arrayTest(java.lang.String[])\r\nCLASS ^moc.etz.zunit.targets.ServiceAImpl\r\nMETHOD  arrayTest(java.lang.String[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(4L)\r\nIF true\r\nDO\r\n    atException(_moc_etz_zunit_instrument_MethodNames_mid_,$*,$^);\r\nENDRULE"
 } ]
-2020-03-29 23:27:09.916 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
+2020-03-29 23:37:35.104 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
   "fileName" : "entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
   "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atEntry(_moc_etz_zunit_instrument_MethodNames_mid_,$*);\r\nENDRULE"
 }, {
@@ -86,7 +86,7 @@
   "fileName" : "exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
   "text" : "RULE exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atException(_moc_etz_zunit_instrument_MethodNames_mid_,$*,$^);\r\nENDRULE"
 } ]
-2020-03-29 23:27:09.916 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
+2020-03-29 23:37:35.104 [main] DEBUG moc.etz.zunit.instrument.BMUtil.submitText(95) - submit[ {
   "fileName" : "entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
   "text" : "RULE entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT ENTRY\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atEntry(_moc_etz_zunit_instrument_MethodNames_mid_,$*);\r\nENDRULE"
 }, {
@@ -96,61 +96,61 @@
   "fileName" : "exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])",
   "text" : "RULE exception:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])\r\nINTERFACE ^moc.etz.zunit.targets.ServiceB\r\nMETHOD  doServiceB(int[])\r\n    HELPER moc.etz.zunit.trace.TraceHelper\r\nAT EXCEPTION EXIT\r\n    BIND\r\n    _moc_etz_zunit_instrument_MethodNames_mid_:java.lang.Long=java.lang.Long.valueOf(5L)\r\nIF true\r\nDO\r\n    atException(_moc_etz_zunit_instrument_MethodNames_mid_,$*,$^);\r\nENDRULE"
 } ]
-2020-03-29 23:27:09.944 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
-2020-03-29 23:27:09.944 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
-2020-03-29 23:27:09.953 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:09.953 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:09.985 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
-2020-03-29 23:27:09.985 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
-2020-03-29 23:27:09.985 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :false
-2020-03-29 23:27:09.985 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :false
-2020-03-29 23:27:10.002 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 3 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.002 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 2 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.002 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 4 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.002 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 3 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.002 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 2 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.002 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 4 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.002 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:10.002 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 1 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.002 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:10.002 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 1 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.002 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:10.002 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:10.003 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:10.003 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:10.003 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.003 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:10.003 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
-2020-03-29 23:27:10.003 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.004 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.004 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.004 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.004 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.007 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 3 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.007 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 2 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.007 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 4 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.007 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 3 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.007 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 4 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.007 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 2 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.007 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 1 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.008 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.008 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.008 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.008 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.008 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.008 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.007 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 1 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
-2020-03-29 23:27:10.008 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.008 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.011 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.011 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.011 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.011 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.011 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.011 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
-2020-03-29 23:27:10.015 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
-2020-03-29 23:27:10.015 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
-2020-03-29 23:27:10.016 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.016 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
-2020-03-29 23:27:10.026 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
-2020-03-29 23:27:10.026 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
+2020-03-29 23:37:35.134 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
+2020-03-29 23:37:35.134 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
+2020-03-29 23:37:35.143 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.143 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.172 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
+2020-03-29 23:37:35.172 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by entry:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
+2020-03-29 23:37:35.172 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :false
+2020-03-29 23:37:35.172 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :false
+2020-03-29 23:37:35.190 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 3 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.190 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 1 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.190 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 3 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.190 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 4 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.190 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 1 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.190 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.190 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.190 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.190 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 4 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.190 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.190 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 2 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.191 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.190 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper.atEntry(21) - 5 : [ { }, [ 2 ] ],trigger by entry:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.191 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.191 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.191 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.191 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.canPush(56) - canPush :true
+2020-03-29 23:37:35.191 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.193 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.193 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.193 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.193 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.push(82) - stage:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.195 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 1 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.195 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 3 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.195 [ForkJoinPool.commonPool-worker-3] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 1 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.195 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 3 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.196 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 4 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.196 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 2 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-2] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 4 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-1] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 5 : [ { }, [ 2 ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceB.doServiceB(int[])
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.196 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.199 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.199 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.199 [ForkJoinPool.commonPool-worker-3] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.199 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.199 [ForkJoinPool.commonPool-worker-1] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.199 [ForkJoinPool.commonPool-worker-2] DEBUG m.etz.zunit.trace.InvocationContext.pop(134) - unstaged:Invocation(id=1, threadId=1, mid=1, method=hello, signature=hello(int,java.util.List), refPath=null, clazz=class moc.etz.zunit.targets.ServiceAImpl, staticInvoke=false, subject=true, finished=false)
+2020-03-29 23:37:35.202 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
+2020-03-29 23:37:35.202 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 3 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public java.util.List moc.etz.zunit.targets.ServiceAImpl.hello(int,java.util.List)
+2020-03-29 23:37:35.202 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.202 [main] DEBUG m.etz.zunit.trace.InvocationContext.canPop(69) - canPop :true
+2020-03-29 23:37:35.214 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)
+2020-03-29 23:37:35.214 [main] DEBUG moc.etz.zunit.trace.TraceHelper.atExit(40) - 1 : [ { }, 5, [ "a", "b", "c" ] ],trigger by exit:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(int,java.util.List)

@@ -101,7 +101,7 @@ public class SpecFactory {
         JsonNode returned = paramModel.get("returned");
         JsonNode rgt = paramModel.get("returnedGenericType");
         ret.addAll(jsonToGroovyMap(1, null, returned, rgt.asText()));
-        trimLast(ret);
+        endBlock(ret, null);
         return ret;
     }
 
@@ -116,7 +116,7 @@ public class SpecFactory {
                 ret.addAll(jsonToGroovyMap(1, null, argValues.get(i), agtArr.get(i).asText()));
             }
         }
-        trimLast(ret);
+        endBlock(ret, null);
         return ret;
     }
 
@@ -125,10 +125,10 @@ public class SpecFactory {
         return lines;
     }
 
-    private static void trimLast(List<GroovyLine> lines) {
+    private static void endBlock(List<GroovyLine> lines, String endChar) {
         if (lines != null && lines.size() > 1) {
             GroovyLine groovyLine = lines.get(lines.size() - 1);
-            groovyLine.setLineEnd(null);
+            groovyLine.setLineEnd(endChar);
         }
     }
 
@@ -145,7 +145,7 @@ public class SpecFactory {
             for (int i = 0; i < arrayNode.size(); i++) {
                 subLines.addAll(jsonToGroovyMap(ident, null, arrayNode.get(i)));
             }
-            trimLast(subLines);
+            endBlock(subLines, null);
             defs.addAll(subLines);
             defs.add(new GroovyLine(identStr, "]"));
         } else if (value == null) {
@@ -164,7 +164,7 @@ public class SpecFactory {
                 JsonNode subNode = value.get(nextName);
                 subLines.addAll(jsonToGroovyMap(ident, nextName, subNode));
             }
-            trimLast(subLines);
+            endBlock(subLines, null);
             defs.addAll(subLines);
             defs.add(new GroovyLine(identStr, "]"));
         }

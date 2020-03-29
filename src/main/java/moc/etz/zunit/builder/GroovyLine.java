@@ -8,6 +8,7 @@ public class GroovyLine {
     public static final String NEW_LINE = "\n";
     public static final String COLON = ":";
     public static final String COMMA_NEW_LINE = ",";
+    public static final String SEMICOLON = ";";
     String ident;
     String tokens;
     String lineEnd;
