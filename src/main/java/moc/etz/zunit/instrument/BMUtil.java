@@ -12,67 +12,38 @@ import org.jboss.byteman.agent.submit.Submit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class BMUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(BMUtil.class);
-    public static void main(String[] args) {
-        System.out.println(getPid());
+
+    public static int getPort() {
+        return 8848;
     }
-    private interface CLibrary extends Library {
-        CLibrary INSTANCE =  Native.load("c", CLibrary.class);
-        int getpid ();
-    }
-    public final static String AGENT_VERSION = "org.jboss.byteman.agent.version";
+
 
     public static String getHost() {
         return "localhost";
     }
 
-
-    public static int getPort() {
-        ServerSocket socket = null;
-        try {
-            socket = new ServerSocket(0);
-            socket.setReuseAddress(true);
-            int port = socket.getLocalPort();
-            try {
-                socket.close();
-            } catch (IOException e) {
-                // Ignore IOException on close()
-            }
-            return port;
-        } catch (IOException e) {
-        } finally {
-            if (socket != null) {
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                }
-            }
-        }
-        throw new IllegalStateException("Could not find a free TCP/IP port to start byteman agent");
-    }
-
-
     public static int getPid() {
         int pid;
         try {
-            pid=Kernel32.INSTANCE.GetCurrentProcessId();
+            pid = Kernel32.INSTANCE.GetCurrentProcessId();
         } catch (Exception e) {
-            pid= CLibrary.INSTANCE.getpid();
+            pid = CLibrary.INSTANCE.getpid();
         }
-        LOGGER.debug("CurrentProcessId="+pid);
+        LOGGER.debug("CurrentProcessId=" + pid);
         return pid;
     }
 
     public static void loadAgent() throws Exception {
+        System.setProperty("org.jboss.byteman.verbose, org.jboss.byteman.debug", "true");
+        System.setProperty("org.jboss.byteman.transform.all", "true");
+        System.setProperty("org.jboss.byteman.compileToBytecode", "true");
         String id = String.valueOf(getPid());
-
         try {
             System.out.println("BMUnit : loading agent id = " + id);
             Properties properties = new Properties();
@@ -90,8 +61,6 @@ public class BMUtil {
         } catch (AgentInitializationException e) {
             // this probably indicates that the agent is already installed
         }
-
-
     }
 
     @SneakyThrows
@@ -99,7 +68,7 @@ public class BMUtil {
         Submit submit = new Submit(getHost(), getPort());
         List<String> files = new ArrayList<String>();
         files.add(btm);
-        System.out.println("BMUnit : loading file script = " + btm);
+        LOGGER.debug("BMUnit : loading file script = " + btm);
         submit.addRulesFromFiles(files);
     }
 
@@ -108,8 +77,14 @@ public class BMUtil {
         Submit submit = new Submit(getHost(), getPort());
         List<String> files = new ArrayList<String>();
         files.add(btm);
-        System.out.println("BMUnit : unloading file script = " + btm);
+        LOGGER.debug("BMUnit : unloading file script = " + btm);
         submit.deleteRulesFromFiles(files);
+    }
+
+    private interface CLibrary extends Library {
+        CLibrary INSTANCE = Native.load("c", CLibrary.class);
+
+        int getpid();
     }
 
 

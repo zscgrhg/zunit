@@ -1,1 +1,4 @@
-00:31:25.373 [main] DEBUG moc.etz.zunit.instrument.BMUtil - CurrentProcessId=13568
+09:46:47.892 [main] DEBUG moc.etz.zunit.instrument.BMUtil - CurrentProcessId=12092
+09:46:47.892 [main] DEBUG moc.etz.zunit.instrument.BMUtil - CurrentProcessId=12092
+09:46:48.034 [main] DEBUG moc.etz.zunit.trace.InvocationHelper - entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(java.util.List)
+09:46:48.034 [main] DEBUG moc.etz.zunit.trace.InvocationHelper - entry:public abstract java.util.List moc.etz.zunit.targets.ServiceA.hello(java.util.List)
