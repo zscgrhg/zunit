@@ -26,6 +26,7 @@ public class TraceHelper {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
             MethodNames names = MethodNames.METHOD_NAMES_MAP.get(mid);
             invocation.setMethod(names.name);
+            invocation.setSignature(names.signature);
             Object thisObject = args[0];
             invocation.setThisObject(thisObject);
             invocation.staticInvoke = thisObject == null;

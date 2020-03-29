@@ -1,6 +1,7 @@
 package moc.etz.zunit;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import moc.etz.zunit.builder.GroovyLine;
 import moc.etz.zunit.builder.SpecFactory;
 import moc.etz.zunit.instrument.BMUtil;
 import moc.etz.zunit.parse.SubjectManager;
@@ -8,8 +9,10 @@ import moc.etz.zunit.targets.ServiceA;
 import moc.etz.zunit.targets.ServiceAImpl;
 import moc.etz.zunit.trace.Invocation;
 import moc.etz.zunit.trace.TraceReaderImpl;
+import moc.etz.zunit.util.MustacheUtil;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -27,6 +30,8 @@ public class Main {
         JsonNode jsonNode1 = traceReader.readOutParam(1L);
         System.out.println(invocation);
         SpecFactory.writeSpec(1L);
-
+        List<GroovyLine> groovyLines = SpecFactory.buildArgsLine(jsonNode1);
+        String render = MustacheUtil.render("btm/groovy.mustache", groovyLines);
+        System.out.println(render);
     }
 }

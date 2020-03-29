@@ -36,6 +36,7 @@ public class Invocation {
     @JsonIgnore
     public Object thisObject;
     public String method;
+    public String signature;
     public String refPath;
     public Class clazz;
     public boolean staticInvoke = false;
