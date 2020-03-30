@@ -1,4 +1,4 @@
-package com.etz.pkg20200330215640
+package com.etz.pkg2020033100742
 
 import com.fasterxml.jackson.core.type.TypeReference
 import spock.lang.Specification
@@ -8,7 +8,10 @@ class ServiceAImplhello1Spec extends Specification {
 		given:
 			def subject = new moc.etz.zunit.targets.ServiceAImpl()
 			subject.serviceB = Mock(moc.etz.zunit.targets.ServiceBImpl) {
+				1 * doServiceB(INPUTS2[0]) >> RETURNED2
+				1 * doServiceB(INPUTS3[0]) >> RETURNED3
 				1 * doServiceB(INPUTS4[0]) >> RETURNED4
+				1 * doServiceB(INPUTS5[0]) >> RETURNED5
 			}
 		when:
 			def ret = subject.hello(*INPUTS1)
@@ -25,9 +28,24 @@ class ServiceAImplhello1Spec extends Specification {
 					'c'
 			].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	]
-	static final def INPUTS4 = [
+	static final def INPUTS2 = [
 			[
 					3,
+			] as int[]
+	]
+	static final def INPUTS3 = [
+			[
+					1,
+			] as int[]
+	]
+	static final def INPUTS4 = [
+			[
+					4,
+			] as int[]
+	]
+	static final def INPUTS5 = [
+			[
+					2,
 			] as int[]
 	]
 	
@@ -39,9 +57,24 @@ class ServiceAImplhello1Spec extends Specification {
 					'c'
 			].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	]
-	static final def OUTPUTS4 = [
+	static final def OUTPUTS2 = [
 			[
 					3,
+			] as int[]
+	]
+	static final def OUTPUTS3 = [
+			[
+					1,
+			] as int[]
+	]
+	static final def OUTPUTS4 = [
+			[
+					4,
+			] as int[]
+	]
+	static final def OUTPUTS5 = [
+			[
+					2,
 			] as int[]
 	]
 	
@@ -68,8 +101,20 @@ class ServiceAImplhello1Spec extends Specification {
 			]
 	].reconstruction(new TypeReference<java.util.List<moc.etz.zunit.targets.HelloEntity<java.lang.String>>>() {})
 	
-	static final def RETURNED4 = [
+	static final def RETURNED2 = [
 			'3',
+	].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
+	
+	static final def RETURNED3 = [
+			'1',
+	].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
+	
+	static final def RETURNED4 = [
+			'4',
+	].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
+	
+	static final def RETURNED5 = [
+			'2',
 	].reconstruction(new TypeReference<java.util.List<java.lang.String>>() {})
 	
 }

@@ -18,12 +18,14 @@ import java.util.stream.Collectors;
 
 @Data
 public class InvocationContext {
+    private static final Logger LOGGER = LoggerFactory.getLogger(InvocationContext.class);
+
     public final static TransmittableThreadLocal<Invocation> PREVIOUS = new TransmittableThreadLocal<>();
     public static final AtomicLong CXT_INCR = new AtomicLong(1);
     public final static ThreadLocal<Invocation> STAGED = new ThreadLocal<>();
     public final static ThreadLocal<InvocationContext> CONTEXT = new ThreadLocal<>();
     public final static ThreadLocal<Stack<Invocation>> STACK_THREAD_LOCAL = new ThreadLocal<>();
-    private static final Logger LOGGER = LoggerFactory.getLogger(InvocationContext.class);
+
     public final AtomicInteger ENTRY_COUNTER = new AtomicInteger(Integer.MIN_VALUE);
     public final AtomicInteger EXIT_COUNTER = new AtomicInteger(Integer.MAX_VALUE);
 
