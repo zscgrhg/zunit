@@ -7,16 +7,17 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinWorkerThread;
 
-import static com.alibaba.ttl.TransmittableThreadLocal.Transmitter.clear;
-import static com.alibaba.ttl.TransmittableThreadLocal.Transmitter.restore;
+import static com.alibaba.ttl.TransmittableThreadLocal.Transmitter.*;
 
 public class TtlHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(TtlHelper.class);
     public static final ThreadLocal<Map<String, Integer>> BARRIER = new ThreadLocal<>();
     public static final ThreadLocal<Object> TTL_BACKUP = new ThreadLocal<>();
+    public static final Map<Object, Object> CAPTURED = new ConcurrentHashMap<>();
 
     Rule rule;
 
@@ -74,4 +75,21 @@ public class TtlHelper {
         Object backup = TTL_BACKUP.get();
         restore(backup);
     }
+
+    public void saveCaptured(Object task) {
+        CAPTURED.put(task, capture());
+    }
+
+    public void setCaptured(Object task) {
+        Object captured = CAPTURED.get(task);
+        Object backup = replay(captured);
+        TTL_BACKUP.set(backup);
+    }
+
+    public void cleanCaptured(Object task) {
+        Object backup = TTL_BACKUP.get();
+        restore(backup);
+        CAPTURED.remove(task);
+    }
+
 }
