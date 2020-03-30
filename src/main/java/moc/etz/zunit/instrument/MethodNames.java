@@ -2,6 +2,8 @@ package moc.etz.zunit.instrument;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Data
 public class MethodNames {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodNames.class);
     public static final AtomicLong NAMES_INCR = new AtomicLong(1);
     public static final Map<Long, MethodNames> METHOD_NAMES_MAP = new ConcurrentHashMap<>();
     public static final String BIND_NAME = "_moc_etz_zunit_instrument_MethodNames_mid_";
@@ -49,6 +52,7 @@ public class MethodNames {
     public static MethodNames build(Method m) {
         MethodNames methodNames = new MethodNames(m);
         METHOD_NAMES_MAP.putIfAbsent(methodNames.mid, methodNames);
+        LOGGER.debug(methodNames.mid + " is mapping to :" + methodNames.genericSymbol);
         return methodNames;
     }
 

@@ -10,9 +10,14 @@ import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinWorkerThread;
 
+import static com.alibaba.ttl.TransmittableThreadLocal.Transmitter.clear;
+import static com.alibaba.ttl.TransmittableThreadLocal.Transmitter.restore;
+
 public class TtlHelper {
-    public static final ThreadLocal<Map<String, Integer>> BARRIER = new ThreadLocal<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(TtlHelper.class);
+    public static final ThreadLocal<Map<String, Integer>> BARRIER = new ThreadLocal<>();
+    public static final ThreadLocal<Object> TTL_BACKUP = new ThreadLocal<>();
+
     Rule rule;
 
     public TtlHelper(Rule rule) {
@@ -42,19 +47,31 @@ public class TtlHelper {
         return success;
     }
 
-    public void cleanBarrier(Long mid) {
+    public boolean cleanBarrier(Long mid) {
         MethodNames names = MethodNames.METHOD_NAMES_MAP.get(mid);
         String barrier = names.genericSymbol;
         Map<String, Integer> barrierMap = BARRIER.get();
         if (barrierMap == null) {
-            return;
+            return false;
         }
-        barrierMap.remove(barrier);
+        Integer remove = barrierMap.remove(barrier);
+
         if (barrierMap.isEmpty()) {
             BARRIER.remove();
-            LOGGER.debug("cleanBarrier " + mid);
+
         }
+        boolean success = (remove != null);
+        LOGGER.debug("cleanBarrier " + mid + ": " + success);
+        return success;
     }
 
+    public void backupTtl() {
+        final Object backup = clear();
+        TTL_BACKUP.set(backup);
+    }
 
+    public void restoreTtl() {
+        Object backup = TTL_BACKUP.get();
+        restore(backup);
+    }
 }
