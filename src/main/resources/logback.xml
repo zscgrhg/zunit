@@ -14,7 +14,7 @@
         </encoder>
     </appender>
     <logger name="moc.etz" level="DEBUG">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </logger>
     <root level="INFO">

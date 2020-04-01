@@ -59,7 +59,7 @@ public class SubjectManager {
         for (Class clz : classList) {
 
             if (ss.selectTestSubject(clz)) {
-                TraceUtil.traceInvocation(clz);
+                TraceUtil.traceInterfaces(clz);
                 SUBJECT_CLASS_REFS.putIfAbsent(clz, new HashMap<>());
                 Field[] fields = clz.getDeclaredFields();
 
@@ -69,7 +69,7 @@ public class SubjectManager {
                     obj.setType(RefsInfo.RefType.FIELD);
                     Class<?> type = field.getType();
                     if (ts.select(field) || ts.select(type)) {
-                        TraceUtil.traceInvocation(type);
+                        TraceUtil.traceInterfaces(type);
                     }
                     obj.setDeclaredType(type);
                     obj.setName(field.getName());
@@ -101,7 +101,7 @@ public class SubjectManager {
             obj.setType(RefsInfo.RefType.ARG);
             Class<?> type = param.getType();
             if (ts.select(param)) {
-                TraceUtil.traceInvocation(type);
+                TraceUtil.traceInterfaces(type);
             }
             obj.setDeclaredType(type);
             obj.setName(param.getName());

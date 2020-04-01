@@ -13,6 +13,16 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TraceUtil {
     private static final Map<Class, Boolean> TRACED = new ConcurrentHashMap<>();
 
+    public static void traceInterfaces(Class clazz) {
+        Class[] interfaces = clazz.getInterfaces();
+        for (Class anInterface : interfaces) {
+            if (!anInterface.getPackage().getName().startsWith("java")) {
+                traceInvocation(anInterface);
+            }
+        }
+        traceInvocation(clazz);
+    }
+
     public static void traceInvocation(Class clazz) {
         Boolean exist = TRACED.putIfAbsent(clazz, true);
         if (exist != null) {
