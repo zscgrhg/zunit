@@ -18,7 +18,7 @@ public class MethodNames {
     public static final String BIND_NAME = "_moc_etz_zunit_instrument_MethodNames_mid_";
     @JsonIgnore
     public final Long mid = NAMES_INCR.getAndIncrement();
-
+    public final Method method;
     public final String ownerName;
     public final Class owner;
     public final String ownerType;
@@ -31,6 +31,7 @@ public class MethodNames {
 
 
     private MethodNames(Method m) {
+        this.method = m;
         this.parametersType = m.getParameterTypes();
         this.owner = m.getDeclaringClass();
         this.ownerType = owner.isInterface() ? "INTERFACE" : "CLASS";

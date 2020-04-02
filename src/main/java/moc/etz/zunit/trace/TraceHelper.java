@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.stream.Stream;
 
@@ -34,10 +35,14 @@ public class TraceHelper {
             invocation.setThisObject(thisObject);
             invocation.staticInvoke = thisObject == null;
             invocation.setClazz(thisObject == null ? names.owner : thisObject.getClass());
+            Class c = invocation.clazz;
+            if (Proxy.isProxyClass(invocation.clazz)) {
+                c = findFirstOwner(invocation.clazz, names.method);
+            }
             invocation.saveObjectsRef(names.genericSymbol, methodArgs);
-            Method method = invocation.clazz.getMethod(names.name, names.parametersType);
-            invocation.genericReturned = resolve(method.getGenericReturnType(), invocation.clazz).getTypeName();
-            invocation.genericArgs = getGenericArgs(method, invocation.clazz);
+            //Method method = c.getMethod(names.name, names.parametersType);
+            invocation.genericReturned = resolve(names.method.getGenericReturnType(), c).getTypeName();
+            invocation.genericArgs = getGenericArgs(names.method, c);
             context.push(invocation, methodArgs);
         }
     }
@@ -58,6 +63,19 @@ public class TraceHelper {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
             context.pop(methodArgs, null, t);
         }
+    }
+
+    public Class findFirstOwner(Class proxy, Method method) {
+        Type[] genericInterfaces = proxy.getGenericInterfaces();
+        for (Type type : genericInterfaces) {
+            assert type instanceof Class;
+            Class clazz = (Class) type;
+            boolean anyMatch = Stream.of(clazz.getMethods()).anyMatch(method::equals);
+            if (anyMatch) {
+                return clazz;
+            }
+        }
+        return proxy;
     }
 
     public String[] getGenericArgs(Method m, Class inheritorClass) {
