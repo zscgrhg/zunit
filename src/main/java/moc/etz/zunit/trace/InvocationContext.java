@@ -3,7 +3,8 @@ package moc.etz.zunit.trace;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import moc.etz.zunit.builder.SpecFactory;
+import moc.etz.zunit.builder.SpecWriter;
+import moc.etz.zunit.config.TraceConfig;
 import moc.etz.zunit.instrument.MethodNames;
 import moc.etz.zunit.parse.RefsInfo;
 import moc.etz.zunit.parse.SubjectManager;
@@ -14,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 @Data
 public class InvocationContext {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvocationContext.class);
-    private static final ExecutorService SPEC_FACTORY = Executors.newFixedThreadPool(16);
+    private static final SpecWriter SPEC_WRITER = TraceConfig.INSTANCE.getSpecWriter();
 
     public final static TransmittableThreadLocal<Invocation> PREVIOUS = new TransmittableThreadLocal<>();
     public static final AtomicLong CXT_INCR = new AtomicLong(1);
@@ -135,9 +134,8 @@ public class InvocationContext {
 
         if (stack.isEmpty()) {
             traceWriter.write(this);
-            SPEC_FACTORY.submit(() -> {
-                SpecFactory.writeSpec(pop.id);
-            });
+            SPEC_WRITER.write(pop.id);
+
             CONTEXT.remove();
             PREVIOUS.remove();
             Invocation prevTTL = STAGED.get();

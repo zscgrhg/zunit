@@ -1,12 +1,16 @@
 package moc.etz.zunit.config;
 
 import lombok.SneakyThrows;
+import moc.etz.zunit.ZUnit;
+import moc.etz.zunit.builder.ExecutorSpecWriterImpl;
+import moc.etz.zunit.builder.SpecWriter;
 import moc.etz.zunit.trace.TraceWriterImpl;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Properties;
 
 
@@ -41,5 +45,18 @@ public class TraceConfigImpl implements TraceConfig {
     @Override
     public File getSpecOutputsDir() {
         return specDir;
+    }
+
+    @Override
+    public SpecWriter getSpecWriter() {
+        SpecWriter specWriter = Optional.ofNullable(ZUnit.CONFIG.getProperty("zunit.spec.writer")).map(s -> {
+            try {
+                Class<?> swImpl = Class.forName(s);
+                return (SpecWriter) swImpl.newInstance();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).orElse(new ExecutorSpecWriterImpl());
+        return specWriter;
     }
 }

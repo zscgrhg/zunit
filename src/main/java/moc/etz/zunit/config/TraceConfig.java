@@ -1,5 +1,7 @@
 package moc.etz.zunit.config;
 
+import moc.etz.zunit.builder.SpecWriter;
+
 import java.io.File;
 
 public interface TraceConfig {
@@ -8,4 +10,6 @@ public interface TraceConfig {
     File getTraceOutputsDir();
 
     File getSpecOutputsDir();
+
+    SpecWriter getSpecWriter();
 }
