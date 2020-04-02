@@ -133,7 +133,7 @@ public class SpecFactory {
     }
 
     private static void endBlock(List<GroovyLine> lines, String endChar) {
-        if (lines != null && lines.size() > 1) {
+        if (lines != null) {
             GroovyLine groovyLine = lines.get(lines.size() - 1);
             groovyLine.setLineEnd(endChar);
         }
