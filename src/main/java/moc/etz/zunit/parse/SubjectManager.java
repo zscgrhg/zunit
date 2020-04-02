@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static moc.etz.zunit.instrument.MethodNames.normalizeVarargs;
+import static moc.etz.zunit.instrument.TraceUtil.shouldIgnore;
 
 public class SubjectManager {
     public static final SubjectManager instance = new SubjectManager();
@@ -87,7 +88,7 @@ public class SubjectManager {
 
     public void parseMethod(Class clz, Method method) {
 
-        if (method.isSynthetic()) {
+        if (shouldIgnore(method)) {
             return;
         }
         Parameter[] parameters = method.getParameters();
