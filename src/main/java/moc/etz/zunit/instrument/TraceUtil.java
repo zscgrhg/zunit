@@ -14,19 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TraceUtil {
     private static final Map<Class, Boolean> TRACED = new ConcurrentHashMap<>();
 
-    public static void traceInterfaces(Class clazz) {
-        Class[] interfaces = clazz.getInterfaces();
-        for (Class anInterface : interfaces) {
-            if (!anInterface.getPackage().getName().startsWith("java")) {
-                traceInvocation(anInterface);
-            }
-        }
-        traceInvocation(clazz);
-    }
 
     public static boolean shouldIgnore(Method method) {
-        return method.isSynthetic() || Modifier.isStatic(method.getModifiers())
-                || Modifier.isPrivate(method.getModifiers());
+        return method.isSynthetic()
+                || Modifier.isStatic(method.getModifiers())
+                || Modifier.isPrivate(method.getModifiers())
+                || method.getDeclaringClass().getPackage().getName().startsWith("java");
     }
 
     public static void traceInvocation(Class clazz) {
@@ -40,7 +33,7 @@ public class TraceUtil {
             if (shouldIgnore(method)) {
                 continue;
             }
-            MethodNames names = MethodNames.build(method);
+            MethodNames names = MethodNames.build(method, clazz);
             {
 
                 BMRuleMustacheModel model = BMRuleMustacheModel.atEntry(names, true);
