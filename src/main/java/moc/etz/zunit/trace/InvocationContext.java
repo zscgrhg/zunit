@@ -105,7 +105,7 @@ public class InvocationContext {
         MethodNames names = MethodNames.METHOD_NAMES_MAP.get(invocation.mid);
         ParamModel p = new ParamModel();
         p.args = args;
-        p.argsGenericType = names.genericArgs;
+        p.argsGenericType = invocation.genericArgs;
         p.argsType = ParamModel.valuesTypeOf(args);
         p.invocationId = invocation.id;
         p.name = ParamModel.INPUTS;
@@ -120,10 +120,11 @@ public class InvocationContext {
         p.invocationId = pop.id;
         p.args = args;
         p.argsType = ParamModel.valuesTypeOf(args);
-        p.argsGenericType = names.genericArgs;
+        p.argsGenericType = pop.genericArgs;
         p.returned = returnValue;
         p.returnedType = ParamModel.typeOf(p.returned);
-        p.returnedGenericType = names.genericReturned;
+
+        p.returnedGenericType = pop.genericReturned;
         p.thrown = exception;
         if (exception != null) {
             p.exception = exception.getClass().getName();

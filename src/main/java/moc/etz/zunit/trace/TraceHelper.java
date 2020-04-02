@@ -1,10 +1,14 @@
 package moc.etz.zunit.trace;
 
+import lombok.SneakyThrows;
 import moc.etz.zunit.instrument.MethodNames;
+import net.jodah.typetools.TypeResolver;
 import org.jboss.byteman.rule.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.stream.Stream;
 
 public class TraceHelper {
@@ -15,7 +19,7 @@ public class TraceHelper {
         this.rule = rule;
     }
 
-
+    @SneakyThrows
     public void atEntry(Long mid, Object[] args) {
         LOGGER.debug(mid + ",trigger by " + rule.getName());
         InvocationContext context = InvocationContext.getCurrent(true);
@@ -31,6 +35,9 @@ public class TraceHelper {
             invocation.staticInvoke = thisObject == null;
             invocation.setClazz(thisObject == null ? names.owner : thisObject.getClass());
             invocation.saveObjectsRef(names.genericSymbol, methodArgs);
+            Method method = invocation.clazz.getMethod(names.name, names.parametersType);
+            invocation.genericReturned = resolve(method.getGenericReturnType(), invocation.clazz).getTypeName();
+            invocation.genericArgs = getGenericArgs(method, invocation.clazz);
             context.push(invocation, methodArgs);
         }
     }
@@ -51,5 +58,14 @@ public class TraceHelper {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
             context.pop(methodArgs, null, t);
         }
+    }
+
+    public String[] getGenericArgs(Method m, Class inheritorClass) {
+        Type[] parameterTypes = m.getGenericParameterTypes();
+        return Stream.of(parameterTypes).map(t -> resolve(t, inheritorClass).getTypeName()).toArray(String[]::new);
+    }
+
+    public Type resolve(Type type, Class inheritorClass) {
+        return TypeResolver.reify(type, inheritorClass);
     }
 }

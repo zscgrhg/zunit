@@ -33,7 +33,7 @@ public class TraceUtil {
             if (shouldIgnore(method)) {
                 continue;
             }
-            MethodNames names = MethodNames.build(method, clazz);
+            MethodNames names = MethodNames.build(method);
             {
 
                 BMRuleMustacheModel model = BMRuleMustacheModel.atEntry(names, true);

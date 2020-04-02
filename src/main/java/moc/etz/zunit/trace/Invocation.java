@@ -43,8 +43,12 @@ public class Invocation {
     public boolean staticInvoke = false;
     public boolean subject = false;
     public volatile boolean finished = false;
+    public String genericReturned;
+    public String[] genericArgs;
+
     @JsonIgnore
     Invocation parent;
+
     @SneakyThrows
     public void saveObjectsRef(String methodSignure, Object[] args) {
         try {
