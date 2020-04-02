@@ -12,8 +12,8 @@ import java.util.Properties;
 
 public class TraceConfigImpl implements TraceConfig {
     public static final File workspace = new File("data").toPath().resolve(ymdHmsOfNow()).toFile();
-    public static final File specDir = Paths.get("src\\test\\groovy\\com\\etz")
-            .resolve("pkg" + new SimpleDateFormat("yyyyMMddHmmss").format(new Date())).toFile();
+    public static final File specDir = Paths.get("src\\test\\groovy\\")
+            .toFile();
 
     static {
         if (!workspace.exists()) {

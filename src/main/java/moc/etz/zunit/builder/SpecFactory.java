@@ -10,14 +10,18 @@ import moc.etz.zunit.trace.TraceReaderImpl;
 import moc.etz.zunit.util.MustacheUtil;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class SpecFactory {
-
+    public static final AtomicLong BUILD_INCR = new AtomicLong(1);
     static TraceReader reader = new TraceReaderImpl();
 
     @SneakyThrows
@@ -26,10 +30,13 @@ public class SpecFactory {
         Class clazz = subjectInvocation.getClazz();
         String method = subjectInvocation.getMethod();
         SpecModel specModel = new SpecModel();
+        specModel.pkg = clazz.getPackage().getName();
         specModel.subject = clazz.getSimpleName();
         specModel.id = subjectInvocation.id;
         specModel.method = method;
-        specModel.fileName = specModel.subject + method + specModel.id + "Spec.groovy";
+        specModel.className = specModel.subject + method + specModel.id + "D" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
+                + "No" + BUILD_INCR.getAndIncrement() + "Spec";
+        specModel.fileName = specModel.className + ".groovy";
         specModel.subjectDecl = MustacheUtil.format("def subject = new {{0}}()", clazz.getName());
 
         List<Invocation> children = subjectInvocation.children;
@@ -83,7 +90,7 @@ public class SpecFactory {
     public static List<String> buildMockBlock(Map.Entry<String, List<Invocation>> invs) {
         List<String> ret = new ArrayList<>();
         List<Invocation> value = invs.getValue();
-        Class clazz = value.get(0).getClazz();
+        Class clazz = value.get(0).getDeclaredClass();
         ret.add(MustacheUtil.format("subject.{{0}}=Mock({{1}}){", invs.getKey(), clazz.getName()));
         for (Invocation invocation : value) {
             String args = invocation.getSignature().replaceAll("^.*\\((.*?)\\)", "$1");
@@ -185,10 +192,15 @@ public class SpecFactory {
     public static void writeSpec(Long subjectInvocationId) {
         SpecModel model = build(subjectInvocationId);
         String specText = MustacheUtil.render("btm/spec.mustache", model);
+        Path pkg = TraceConfig.INSTANCE
+                .getSpecOutputsDir()
+                .toPath()
+                .resolve(model.getPkg());
+        File pkgDir = pkg.toFile();
+        if (!pkgDir.exists()) {
+            pkgDir.mkdirs();
+        }
         Files.copy(new ByteArrayInputStream(specText.getBytes("UTF-8")),
-                TraceConfig.INSTANCE
-                        .getSpecOutputsDir()
-                        .toPath()
-                        .resolve(model.fileName), StandardCopyOption.REPLACE_EXISTING);
+                pkg.resolve(model.fileName), StandardCopyOption.REPLACE_EXISTING);
     }
 }

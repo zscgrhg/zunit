@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import moc.etz.zunit.builder.SpecFactory;
 import moc.etz.zunit.instrument.MethodNames;
+import moc.etz.zunit.parse.RefsInfo;
 import moc.etz.zunit.parse.SubjectManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,7 +95,9 @@ public class InvocationContext {
 
         if (prev != null) {
             invocation.parent = prev;
-            invocation.refPath = prev.refs.get(invocation.thisObject).name;
+            RefsInfo refsInfo = prev.refs.get(invocation.thisObject);
+            invocation.refPath = refsInfo.name;
+            invocation.declaredClass = refsInfo.declaredType;
             prev.getChildren().add(invocation);
         }
         stack.push(invocation);

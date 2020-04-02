@@ -2,16 +2,15 @@ package moc.etz.zunit.builder;
 
 import lombok.Data;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 @Data
 public class SpecModel {
-    String pkg = "pkg" + new SimpleDateFormat("yyyyMMddHmmss").format(new Date());
+    String pkg;
     Long id;
+    String className;
     String fileName;
     String subject;
     String method;

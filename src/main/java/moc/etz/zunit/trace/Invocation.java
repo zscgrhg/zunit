@@ -39,6 +39,7 @@ public class Invocation {
     public String signature;
     public String refPath;
     public Class clazz;
+    public Class declaredClass;
     public boolean staticInvoke = false;
     public boolean subject = false;
     public volatile boolean finished = false;

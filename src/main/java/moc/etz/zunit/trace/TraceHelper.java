@@ -1,7 +1,6 @@
 package moc.etz.zunit.trace;
 
 import moc.etz.zunit.instrument.MethodNames;
-import moc.etz.zunit.util.JsonUtil;
 import org.jboss.byteman.rule.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,7 @@ public class TraceHelper {
 
 
     public void atEntry(Long mid, Object[] args) {
-        LOGGER.debug(mid + " : " + JsonUtil.write(args) + ",trigger by " + rule.getName());
+        LOGGER.debug(mid + ",trigger by " + rule.getName());
         InvocationContext context = InvocationContext.getCurrent(true);
         if (context.canPush()) {
             Invocation invocation = new Invocation();
@@ -37,7 +36,7 @@ public class TraceHelper {
     }
 
     public void atExit(Long mid, Object[] args, Object ret) {
-        LOGGER.debug(mid + " : " + JsonUtil.write(args) + ",trigger by " + rule.getName());
+        LOGGER.debug(mid + ",trigger by " + rule.getName());
         InvocationContext context = InvocationContext.getCurrent(false);
         if (context != null && context.canPop()) {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
@@ -46,7 +45,7 @@ public class TraceHelper {
     }
 
     public void atException(Long mid, Object[] args, Throwable t) {
-        LOGGER.debug(mid + " : " + JsonUtil.write(args) + ",trigger by " + rule.getName());
+        LOGGER.debug(mid + ",trigger by " + rule.getName());
         InvocationContext context = InvocationContext.getCurrent(false);
         if (context != null && context.canPop()) {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
