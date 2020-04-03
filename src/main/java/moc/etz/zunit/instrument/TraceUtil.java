@@ -23,6 +23,7 @@ public class TraceUtil {
     }
 
     public static void traceInvocation(Class clazz) {
+
         Boolean exist = TRACED.putIfAbsent(clazz, true);
         if (exist != null) {
             return;
