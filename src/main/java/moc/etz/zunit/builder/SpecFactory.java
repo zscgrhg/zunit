@@ -9,11 +9,10 @@ import moc.etz.zunit.trace.TraceReader;
 import moc.etz.zunit.trace.TraceReaderImpl;
 import moc.etz.zunit.util.MustacheUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,7 +21,8 @@ import java.util.stream.IntStream;
 
 public class SpecFactory {
     public static final AtomicLong BUILD_INCR = new AtomicLong(1);
-    static TraceReader reader = new TraceReaderImpl();
+    public static final String FN = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+    private static TraceReader reader = new TraceReaderImpl();
 
     @SneakyThrows
     public static SpecModel build(Long subjectInvocationId) {
@@ -34,9 +34,8 @@ public class SpecFactory {
         specModel.subject = clazz.getSimpleName();
         specModel.id = subjectInvocation.id;
         specModel.method = method;
-        specModel.className = specModel.subject + method + specModel.id + "D" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
-                + "No" + BUILD_INCR.getAndIncrement() + "Spec";
-        specModel.fileName = specModel.className + ".groovy";
+        specModel.className = method + "N" + BUILD_INCR.getAndIncrement() + "Spec";
+        specModel.fileName = specModel.subject + FN + "Spec.groovy";
         specModel.subjectDecl = MustacheUtil.format("def subject = new {{0}}()", clazz.getName());
 
         List<Invocation> children = subjectInvocation.children;
@@ -191,7 +190,6 @@ public class SpecFactory {
     @SneakyThrows
     public static void writeSpec(Long subjectInvocationId) {
         SpecModel model = build(subjectInvocationId);
-        String specText = MustacheUtil.render("btm/spec.mustache", model);
         Path pkg = TraceConfig.INSTANCE
                 .getSpecOutputsDir()
                 .toPath()
@@ -200,7 +198,15 @@ public class SpecFactory {
         if (!pkgDir.exists()) {
             pkgDir.mkdirs();
         }
-        Files.copy(new ByteArrayInputStream(specText.getBytes("UTF-8")),
-                pkg.resolve(model.fileName), StandardCopyOption.REPLACE_EXISTING);
+        Path resolve = pkg.resolve(model.fileName);
+        StandardOpenOption soo = StandardOpenOption.APPEND;
+        if (!resolve.toFile().exists()) {
+            model.imports = true;
+            soo = StandardOpenOption.CREATE;
+        }
+        String specText = MustacheUtil.render("btm/spec.mustache", model);
+
+        Files.write(resolve, specText.getBytes("UTF-8"), soo);
+
     }
 }

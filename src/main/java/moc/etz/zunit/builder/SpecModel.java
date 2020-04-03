@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Data
 public class SpecModel {
+    boolean imports = false;
     String pkg;
     Long id;
     String className;
