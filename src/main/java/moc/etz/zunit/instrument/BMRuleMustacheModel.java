@@ -25,10 +25,10 @@ public class BMRuleMustacheModel {
         String ruleId = id + names.symbol;
         BMRuleMustacheModel model = new BMRuleMustacheModel();
         model.ruleId = ruleId;
-        String targetClass = MustacheUtil.format("{{0}} {{#1}}^{{/1}}{{2}}", names.ownerType, override, names.ownerName);
+        String targetClass = MustacheUtil.format("{{0}} {{#1}}^{{/1}}{{2}}", names.contextType, override, names.ownerName);
         model.targetClass = targetClass;
         model.addBind(MustacheUtil.format("{{0}}:java.lang.Long=java.lang.Long.valueOf({{1}}L)", MethodNames.BIND_NAME, names.mid));
-        model.targetMethod = names.signature;
+        model.targetMethod = names.erased;
         return model;
     }
 

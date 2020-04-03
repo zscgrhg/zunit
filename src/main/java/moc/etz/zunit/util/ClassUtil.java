@@ -1,11 +1,18 @@
 package moc.etz.zunit.util;
 
+import net.jodah.typetools.TypeResolver;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.Type;
 import java.util.stream.Stream;
 
 public class ClassUtil {
+    public static Type resolve(Type type, Class inheritorClass) {
+        return TypeResolver.reify(type, inheritorClass);
+    }
+
     public static boolean hasAnnotation(Class target, Class anno) {
         if (target == null || Object.class.equals(target)) {
             return false;

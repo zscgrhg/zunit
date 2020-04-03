@@ -2,7 +2,6 @@ package moc.etz.zunit.trace;
 
 import lombok.SneakyThrows;
 import moc.etz.zunit.instrument.MethodNames;
-import net.jodah.typetools.TypeResolver;
 import org.jboss.byteman.rule.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +10,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.stream.Stream;
+
+import static moc.etz.zunit.util.ClassUtil.resolve;
 
 public class TraceHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(TraceHelper.class);
@@ -34,7 +35,7 @@ public class TraceHelper {
             Object thisObject = args[0];
             invocation.setThisObject(thisObject);
             invocation.staticInvoke = thisObject == null;
-            invocation.setClazz(thisObject == null ? names.owner : thisObject.getClass());
+            invocation.setClazz(thisObject == null ? names.context : thisObject.getClass());
             Class c = invocation.clazz;
             if (Proxy.isProxyClass(invocation.clazz)) {
                 c = findFirstOwner(invocation.clazz, names.method);
@@ -44,6 +45,15 @@ public class TraceHelper {
             invocation.genericReturned = resolve(names.method.getGenericReturnType(), c).getTypeName();
             invocation.genericArgs = getGenericArgs(names.method, c);
             context.push(invocation, methodArgs);
+        }
+    }
+
+    public void atExit(Long mid, Object[] args) {
+        LOGGER.debug(mid + ",trigger by " + rule.getName());
+        InvocationContext context = InvocationContext.getCurrent(false);
+        if (context != null && context.canPop()) {
+            Object[] methodArgs = Stream.of(args).skip(1).toArray();
+            context.pop(methodArgs, null, null);
         }
     }
 
@@ -83,7 +93,5 @@ public class TraceHelper {
         return Stream.of(parameterTypes).map(t -> resolve(t, inheritorClass).getTypeName()).toArray(String[]::new);
     }
 
-    public Type resolve(Type type, Class inheritorClass) {
-        return TypeResolver.reify(type, inheritorClass);
-    }
+
 }
