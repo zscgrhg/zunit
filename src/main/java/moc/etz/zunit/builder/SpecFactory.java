@@ -35,7 +35,7 @@ public class SpecFactory {
         specModel.id = subjectInvocation.id;
         specModel.method = method;
         specModel.className = method + "N" + BUILD_INCR.getAndIncrement() + "Spec";
-        specModel.fileName = specModel.subject + FN + "Spec.groovy";
+        specModel.fileName = specModel.subject + FN;
         specModel.subjectDecl = MustacheUtil.format("def subject = new {{0}}()", clazz.getName());
 
         List<Invocation> children = subjectInvocation.children;
@@ -198,15 +198,21 @@ public class SpecFactory {
         if (!pkgDir.exists()) {
             pkgDir.mkdirs();
         }
-        Path resolve = pkg.resolve(model.fileName);
-        StandardOpenOption soo = StandardOpenOption.APPEND;
-        if (!resolve.toFile().exists()) {
+
+        if (!TraceConfig.INSTANCE.groopByClass()) {
             model.imports = true;
-            soo = StandardOpenOption.CREATE;
+            String specText = MustacheUtil.render("btm/spec.mustache", model);
+            Files.write(pkg.resolve(model.fileName + model.className + "Spec.groovy"),
+                    specText.getBytes("UTF-8"), StandardOpenOption.CREATE);
+        } else {
+            Path resolve = pkg.resolve(model.fileName + "Spec.groovy");
+            StandardOpenOption soo = StandardOpenOption.APPEND;
+            if (!resolve.toFile().exists()) {
+                model.imports = true;
+                soo = StandardOpenOption.CREATE;
+            }
+            String specText = MustacheUtil.render("btm/spec.mustache", model);
+            Files.write(resolve, specText.getBytes("UTF-8"), soo);
         }
-        String specText = MustacheUtil.render("btm/spec.mustache", model);
-
-        Files.write(resolve, specText.getBytes("UTF-8"), soo);
-
     }
 }

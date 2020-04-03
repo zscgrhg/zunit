@@ -12,4 +12,6 @@ public interface TraceConfig {
     File getSpecOutputsDir();
 
     SpecWriter getSpecWriter();
+
+    boolean groopByClass();
 }

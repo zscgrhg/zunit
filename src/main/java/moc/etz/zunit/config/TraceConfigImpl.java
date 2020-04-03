@@ -59,4 +59,11 @@ public class TraceConfigImpl implements TraceConfig {
         }).orElse(new ExecutorSpecWriterImpl());
         return specWriter;
     }
+
+    @Override
+    public boolean groopByClass() {
+        boolean groopByClass = Optional.ofNullable(ZUnit.CONFIG.getProperty("zunit.spec.groop-by-class"))
+                .map("true"::equalsIgnoreCase).orElse(true);
+        return groopByClass;
+    }
 }
