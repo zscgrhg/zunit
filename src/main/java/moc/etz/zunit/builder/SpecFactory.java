@@ -100,7 +100,7 @@ public class SpecFactory {
             List<String> copyLine = IntStream.range(0, length)
                     .mapToObj(i -> {
                         String left = "arg" + i + "";
-                        String right = MustacheUtil.format("OUTPUTS{{0}}()[" + i + "]", invocation.id);
+                        String right = MustacheUtil.format("OUTPUTS{{0}}[" + i + "]", invocation.id);
                         String copy = MustacheUtil.format("if(null!={{1}}&&{{0}}!={{1}}){InvokerHelper.setProperties({{0}}, {{1}}.properties)}", left, right);
                         return copy;
                     }).collect(Collectors.toList());
