@@ -1,6 +1,7 @@
 package moc.etz.zunit.trace;
 
 import lombok.SneakyThrows;
+import moc.etz.zunit.config.TraceConfig;
 import moc.etz.zunit.instrument.MethodNames;
 import org.jboss.byteman.rule.Rule;
 import org.slf4j.Logger;
@@ -15,7 +16,9 @@ import static moc.etz.zunit.util.ClassUtil.resolve;
 
 public class TraceHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(TraceHelper.class);
+    private static final ProxyResolver RESOLVER = TraceConfig.INSTANCE.getProxyResolver();
     Rule rule;
+
 
     public TraceHelper(Rule rule) {
         this.rule = rule;
@@ -37,8 +40,16 @@ public class TraceHelper {
             invocation.staticInvoke = thisObject == null;
             invocation.setClazz(thisObject == null ? names.context : thisObject.getClass());
             Class c = invocation.clazz;
-            if (Proxy.isProxyClass(invocation.clazz)) {
-                c = findFirstOwner(invocation.clazz, names.method);
+            if (RESOLVER.isProxy(thisObject)) {
+                Object targetSource = RESOLVER.getTargetSource(thisObject);
+                Class targetClass = RESOLVER.getTargetClass(thisObject);
+                if (targetSource != null) {
+                    c = targetSource.getClass();
+                } else if (targetClass != null) {
+                    c = targetClass;
+                }
+            } else if (Proxy.isProxyClass(invocation.clazz)) {
+                c = ProxyResolver.findFirstOwnerForJdkProxy(invocation.clazz, names.method);
             }
             invocation.saveObjectsRef(names.genericSymbol, methodArgs);
             //Method method = c.getMethod(names.name, names.parametersType);
@@ -75,18 +86,6 @@ public class TraceHelper {
         }
     }
 
-    public Class findFirstOwner(Class proxy, Method method) {
-        Type[] genericInterfaces = proxy.getGenericInterfaces();
-        for (Type type : genericInterfaces) {
-            assert type instanceof Class;
-            Class clazz = (Class) type;
-            boolean anyMatch = Stream.of(clazz.getMethods()).anyMatch(method::equals);
-            if (anyMatch) {
-                return clazz;
-            }
-        }
-        return proxy;
-    }
 
     public String[] getGenericArgs(Method m, Class inheritorClass) {
         Type[] parameterTypes = m.getGenericParameterTypes();

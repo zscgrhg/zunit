@@ -4,6 +4,8 @@ import lombok.SneakyThrows;
 import moc.etz.zunit.ZUnit;
 import moc.etz.zunit.builder.ExecutorSpecWriterImpl;
 import moc.etz.zunit.builder.SpecWriter;
+import moc.etz.zunit.trace.DefaultProxyResolverImpl;
+import moc.etz.zunit.trace.ProxyResolver;
 import moc.etz.zunit.trace.TraceWriterImpl;
 
 import java.io.File;
@@ -59,6 +61,20 @@ public class TraceConfigImpl implements TraceConfig {
         }).orElse(new ExecutorSpecWriterImpl());
         return specWriter;
     }
+
+    @Override
+    public ProxyResolver getProxyResolver() {
+        ProxyResolver proxyResolver = Optional.ofNullable(ZUnit.CONFIG.getProperty("zunit.proxy.resolver")).map(s -> {
+            try {
+                Class<?> res = Class.forName(s);
+                return (ProxyResolver) res.newInstance();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).orElse(new DefaultProxyResolverImpl());
+        return proxyResolver;
+    }
+
 
     @Override
     public boolean groopByClass() {

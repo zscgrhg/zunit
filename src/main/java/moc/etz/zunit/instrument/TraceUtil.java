@@ -16,10 +16,12 @@ public class TraceUtil {
 
 
     public static boolean shouldIgnore(Method method) {
+        String pkg = method.getDeclaringClass().getPackage().getName();
         return method.isSynthetic()
                 || Modifier.isStatic(method.getModifiers())
                 || Modifier.isPrivate(method.getModifiers())
-                || method.getDeclaringClass().getPackage().getName().startsWith("java");
+                || pkg.startsWith("java.")
+                || pkg.startsWith("sun.");
     }
 
     public static void traceInvocation(Class clazz) {
