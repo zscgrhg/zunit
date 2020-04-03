@@ -199,20 +199,10 @@ public class SpecFactory {
             pkgDir.mkdirs();
         }
 
-        if (!TraceConfig.INSTANCE.groopByClass()) {
-            model.imports = true;
-            String specText = MustacheUtil.render("btm/spec.mustache", model);
-            Files.write(pkg.resolve(model.fileName + model.className + "Spec.groovy"),
-                    specText.getBytes("UTF-8"), StandardOpenOption.CREATE);
-        } else {
-            Path resolve = pkg.resolve(model.fileName + "Spec.groovy");
-            StandardOpenOption soo = StandardOpenOption.APPEND;
-            if (!resolve.toFile().exists()) {
-                model.imports = true;
-                soo = StandardOpenOption.CREATE;
-            }
-            String specText = MustacheUtil.render("btm/spec.mustache", model);
-            Files.write(resolve, specText.getBytes("UTF-8"), soo);
-        }
+        model.imports = true;
+        model.className = model.fileName + model.className;
+        String specText = MustacheUtil.render("btm/spec.mustache", model);
+        Files.write(pkg.resolve(model.className + ".groovy"),
+                specText.getBytes("UTF-8"), StandardOpenOption.CREATE);
     }
 }
