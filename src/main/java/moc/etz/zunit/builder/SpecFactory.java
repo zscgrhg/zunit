@@ -101,7 +101,7 @@ public class SpecFactory {
                     .mapToObj(i -> {
                         String left = "arg" + i + "";
                         String right = MustacheUtil.format("OUTPUTS{{0}}[" + i + "]", invocation.id);
-                        String copy = MustacheUtil.format("if(null!={{1}}&&{{0}}!={{1}}){InvokerHelper.setProperties({{0}}, {{1}}.properties)}", left, right);
+                        String copy = MustacheUtil.format("if(null!={{1}}&&{{0}}!={{1}}){{{1}}.copyTo({{0}})", left, right);
                         return copy;
                     }).collect(Collectors.toList());
             //ret.add(MustacheUtil.format("1 * {{0}}(" + argsLine + ") >> RETURNED{{1}} ", invocation.method, invocation.id));

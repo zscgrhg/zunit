@@ -24,6 +24,11 @@
     </dependencyManagement>
     <dependencies>
         <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils-core</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+        <dependency>
             <groupId>net.jodah</groupId>
             <artifactId>typetools</artifactId>
             <version>0.6.2</version>
