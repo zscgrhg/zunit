@@ -96,7 +96,19 @@ public class SpecFactory {
             int length = args.split(",").length;
             //String argsLine = IntStream.range(0, length).mapToObj(i -> "{p" + i + "-> p" + i + "==INPUTS{{1}}[" + i + "]}").collect(Collectors.joining(","));
             String argsLine = IntStream.range(0, length).mapToObj(i -> "INPUTS{{1}}[" + i + "]").collect(Collectors.joining(","));
-            ret.add(MustacheUtil.format("1 * {{0}}(" + argsLine + ") >> RETURNED{{1}} ", invocation.method, invocation.id));
+            String newArgsLine = IntStream.range(0, length).mapToObj(i -> "arg" + i + "").collect(Collectors.joining(","));
+            List<String> copyLine = IntStream.range(0, length)
+                    .mapToObj(i -> {
+                        String left = "arg" + i + "";
+                        String right = MustacheUtil.format("OUTPUTS{{0}}[" + i + "]", invocation.id);
+                        String copy = MustacheUtil.format("if({{0}}!={{1}}){InvokerHelper.setProperties({{0}}, {{1}}.deepCopy().properties)}", left, right);
+                        return copy;
+                    }).collect(Collectors.toList());
+            //ret.add(MustacheUtil.format("1 * {{0}}(" + argsLine + ") >> RETURNED{{1}} ", invocation.method, invocation.id));
+            ret.add(MustacheUtil.format("1 * {{0}}(" + argsLine + ") >> { " + newArgsLine + "->", invocation.method, invocation.id));
+            ret.addAll(copyLine);
+            ret.add(MustacheUtil.format("return RETURNED{{0}} ", invocation.id));
+            ret.add("}");
         }
         ret.add("}");
         return ret;
