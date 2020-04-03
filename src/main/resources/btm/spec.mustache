@@ -33,11 +33,13 @@ then:
 {{/Inputs}}
 
 {{#Outputs}}
-    static final def OUTPUTS{{key}}= [
+    static final def OUTPUTS{{key}}= {->
+    [
     {{#value}}
         {{ident}}{{tokens}}{{lineEnd}}
     {{/value}}
     ]
+    }
 {{/Outputs}}
 
 {{#Returned}}
