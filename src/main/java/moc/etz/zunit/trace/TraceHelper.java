@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.stream.Stream;
 
@@ -47,9 +46,9 @@ public class TraceHelper {
                     c = targetSource.getClass();
                 } else if (targetClass != null) {
                     c = targetClass;
+                } else {
+                    c = RESOLVER.findFirstOwner(thisObject, names.method);
                 }
-            } else if (Proxy.isProxyClass(invocation.clazz)) {
-                c = ProxyResolver.findFirstOwnerForJdkProxy(invocation.clazz, names.method);
             }
             invocation.saveObjectsRef(names.genericSymbol, methodArgs);
             //Method method = c.getMethod(names.name, names.parametersType);
