@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import groovy.lang.Closure;
 import lombok.SneakyThrows;
 import moc.etz.zunit.util.JsonUtil;
-import org.apache.commons.beanutils.BeanUtils;
+import net.sf.cglib.beans.BeanCopier;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class ObjectGroovyMethods {
     public static <T> T reconstruction(Object target, TypeReference<T> genericSignature) {
@@ -25,13 +26,13 @@ public class ObjectGroovyMethods {
     }
 
     @SneakyThrows
-    public static <V> V copyTo(V source, V target) {
+    public static <V> V copyIfDirty(V source, V target) {
         Class<?> sclazz = source.getClass();
         if (sclazz.isArray()) {
             Object[] s = (Object[]) source;
             Object[] t = (Object[]) target;
             for (int i = 0; i < Math.min(s.length, t.length); i++) {
-                copyTo(s[i], t[i]);
+                copyIfDirty(s[i], t[i]);
             }
         } else if (Collection.class.isAssignableFrom(sclazz)) {
             List s = new ArrayList();
@@ -39,14 +40,16 @@ public class ObjectGroovyMethods {
             List t = new ArrayList();
             t.addAll((Collection) target);
             for (int i = 0; i < Math.min(s.size(), t.size()); i++) {
-                copyTo(s.get(i), t.get(i));
+                copyIfDirty(s.get(i), t.get(i));
             }
         } else {
-            // BeanUtils.copyProperties(u1, u);
-            BeanUtils.copyProperties(target, source);
+            if (Objects.equals(source, target)) {
+                return target;
+            }
+            BeanCopier beanCopier = BeanCopier.create(target.getClass(), source.getClass(), false);
+            beanCopier.copy(source, target, null);
         }
-
-        return source;
+        return target;
     }
 
     @SneakyThrows
@@ -59,4 +62,5 @@ public class ObjectGroovyMethods {
         ObjectInputStream ois = new ObjectInputStream(bin);
         return (V) ois.readObject();
     }
+
 }
