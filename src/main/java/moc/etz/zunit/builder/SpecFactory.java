@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class SpecFactory {
     public static final AtomicLong BUILD_INCR = new AtomicLong(1);
@@ -98,11 +99,14 @@ public class SpecFactory {
             String argsLine = IntStream.range(0, length).mapToObj(i -> "INPUTS{{1}}[" + i + "]").collect(Collectors.joining(","));
             String newArgsLine = IntStream.range(0, length).mapToObj(i -> "arg" + i + "").collect(Collectors.joining(","));
             List<String> copyLine = IntStream.range(0, length)
-                    .mapToObj(i -> {
+                    .boxed()
+                    .flatMap(i -> {
                         String left = "arg" + i + "";
                         String right = MustacheUtil.format("OUTPUTS{{0}}[" + i + "]", invocation.id);
-                        String copy = MustacheUtil.format("if(null!={{1}}&&{{0}}!={{1}}){{{1}}.copyTo({{0}})", left, right);
-                        return copy;
+                        String copyStart = MustacheUtil.format("if(null!={{1}}&&{{0}}!={{1}}){ ", left, right);//{{1}}.copyTo({{0}})
+                        String copy = MustacheUtil.format("{{1}}.copyTo({{0}})", left, right);//
+                        String copyEnd = "}";//{{1}}.copyTo({{0}})
+                        return Stream.of(copyStart, copy, copyEnd);
                     }).collect(Collectors.toList());
             //ret.add(MustacheUtil.format("1 * {{0}}(" + argsLine + ") >> RETURNED{{1}} ", invocation.method, invocation.id));
             ret.add(MustacheUtil.format("1 * {{0}}(" + argsLine + ") >> { " + newArgsLine + "->", invocation.method, invocation.id));
