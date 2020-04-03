@@ -103,7 +103,7 @@ public class SpecFactory {
                     .flatMap(i -> {
                         String left = "arg" + i + "";
                         String right = MustacheUtil.format("OUTPUTS{{0}}[" + i + "]", invocation.id);
-                        String copy = MustacheUtil.format("{{1}}.copyIfDirty({{0}})", left, right);//
+                        String copy = MustacheUtil.format("{{1}}.copyDirtyPropsTo({{0}})", left, right);//
                         return Stream.of(copy);
                     }).collect(Collectors.toList());
             //ret.add(MustacheUtil.format("1 * {{0}}(" + argsLine + ") >> RETURNED{{1}} ", invocation.method, invocation.id));

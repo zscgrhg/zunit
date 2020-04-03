@@ -10,9 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 public class ObjectGroovyMethods {
@@ -26,30 +24,27 @@ public class ObjectGroovyMethods {
     }
 
     @SneakyThrows
-    public static <V> V copyIfDirty(V source, V target) {
-        Class<?> sclazz = source.getClass();
-        if (sclazz.isArray()) {
+    public static <V> void copyDirtyPropsTo(V source, V target) {
+        Class<?> targetClass = target.getClass();
+        Class<?> sourceClass = source.getClass();
+        if (targetClass.isArray()) {
             Object[] s = (Object[]) source;
             Object[] t = (Object[]) target;
             for (int i = 0; i < Math.min(s.length, t.length); i++) {
-                copyIfDirty(s[i], t[i]);
+                t[i] = s[i];
             }
-        } else if (Collection.class.isAssignableFrom(sclazz)) {
-            List s = new ArrayList();
-            s.addAll((Collection) source);
-            List t = new ArrayList();
-            t.addAll((Collection) target);
-            for (int i = 0; i < Math.min(s.size(), t.size()); i++) {
-                copyIfDirty(s.get(i), t.get(i));
-            }
+        } else if (Collection.class.isAssignableFrom(targetClass)) {
+            Collection c = (Collection) target;
+            c.clear();
+            c.addAll((Collection) source);
         } else {
             if (Objects.equals(source, target)) {
-                return target;
+                return;
             }
-            BeanCopier beanCopier = BeanCopier.create(target.getClass(), source.getClass(), false);
+            BeanCopier beanCopier = BeanCopier.create(target.getClass(), sourceClass, false);
             beanCopier.copy(source, target, null);
         }
-        return target;
+        return;
     }
 
     @SneakyThrows
