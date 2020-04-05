@@ -3,6 +3,7 @@ package moc.etz.zunit.trace;
 import lombok.SneakyThrows;
 import moc.etz.zunit.config.TraceConfig;
 import moc.etz.zunit.instrument.MethodNames;
+import moc.etz.zunit.trace.proxy.ProxyResolver;
 import org.jboss.byteman.rule.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +48,7 @@ public class TraceHelper {
                 } else if (targetClass != null) {
                     c = targetClass;
                 } else {
-                    c = RESOLVER.findFirstOwner(thisObject, names.method);
+                    c = RESOLVER.findOwner(thisObject, names.method);
                 }
             }
             invocation.saveObjectsRef(names.genericSymbol, methodArgs);

@@ -1,4 +1,4 @@
-package moc.etz.zunit.trace;
+package moc.etz.zunit.trace.proxy;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -21,7 +21,7 @@ public class DefaultProxyResolverImpl implements ProxyResolver {
     }
 
     @Override
-    public Class findFirstOwner(Object proxyObject, Method method) {
-        return ProxyResolver.findFirstOwnerForJdkProxy(proxyObject, method);
+    public Class findOwner(Object proxyObject, Method method) {
+        return ProxyResolver.findOwnerForJdkDynamicProxy(proxyObject, method);
     }
 }

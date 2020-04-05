@@ -4,9 +4,9 @@ import lombok.SneakyThrows;
 import moc.etz.zunit.ZUnit;
 import moc.etz.zunit.builder.ExecutorSpecWriterImpl;
 import moc.etz.zunit.builder.SpecWriter;
-import moc.etz.zunit.trace.DefaultProxyResolverImpl;
-import moc.etz.zunit.trace.ProxyResolver;
 import moc.etz.zunit.trace.TraceWriterImpl;
+import moc.etz.zunit.trace.proxy.DefaultProxyResolverImpl;
+import moc.etz.zunit.trace.proxy.ProxyResolver;
 
 import java.io.File;
 import java.nio.file.Paths;

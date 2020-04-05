@@ -1,7 +1,7 @@
 package moc.etz.zunit.config;
 
 import moc.etz.zunit.builder.SpecWriter;
-import moc.etz.zunit.trace.ProxyResolver;
+import moc.etz.zunit.trace.proxy.ProxyResolver;
 
 import java.io.File;
 
