@@ -3,8 +3,8 @@ package moc.etz.zunit.instrument;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import moc.etz.zunit.util.ClassUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import moc.etz.zunit.util.LoggerUtil;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 @Data
 public class MethodNames {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MethodNames.class);
+    private static final Logger LOGGER = LoggerUtil.of(MethodNames.class);
     public static final AtomicLong NAMES_INCR = new AtomicLong(1);
     public static final Map<Long, MethodNames> METHOD_NAMES_MAP = new ConcurrentHashMap<>();
     public static final Map<Class, Map<String, Boolean>> TS_CACHE_MAP = new ConcurrentHashMap<>();

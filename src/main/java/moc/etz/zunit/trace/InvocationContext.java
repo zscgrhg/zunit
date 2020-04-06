@@ -7,8 +7,8 @@ import moc.etz.zunit.builder.SpecWriter;
 import moc.etz.zunit.config.TraceConfig;
 import moc.etz.zunit.instrument.MethodNames;
 import moc.etz.zunit.parse.RefsInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import moc.etz.zunit.util.LoggerUtil;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Data
 public class InvocationContext {
-    private static final Logger LOGGER = LoggerFactory.getLogger(InvocationContext.class);
+    private static final Logger LOGGER = LoggerUtil.of(InvocationContext.class);
     private static final SpecWriter SPEC_WRITER = TraceConfig.INSTANCE.getSpecWriter();
 
     public final static TransmittableThreadLocal<Invocation> PREVIOUS = new TransmittableThreadLocal<>();
@@ -97,6 +97,7 @@ public class InvocationContext {
                 assert prev.threadId == Thread.currentThread().getId();
                 int andIncrement = prev.stackCounter.getAndIncrement();
                 LOGGER.debug("stackCounter ++ :" + andIncrement);
+                return;
             }
             RefsInfo refsInfo = prev.refs.get(invocation.thisObjectSource);
             invocation.refsInfo = refsInfo;
@@ -112,9 +113,10 @@ public class InvocationContext {
             Object arg = args[i];
             if (arg != null) {
                 Object argSource = Invocation.resolveSource(arg);
-                RefsInfo argRefPath = invocation.refs.get(argSource);
-                if (argRefPath != null) {
-                    args[i] = argRefPath;
+                RefsInfo argRefInfo = invocation.refs.get(argSource);
+                if (argRefInfo != null) {
+                    args[i] = argRefInfo;
+                    invocation.argsNames.put(i, argRefInfo);
                 }
             }
         }
@@ -122,13 +124,6 @@ public class InvocationContext {
         p.argsGenericType = invocation.genericArgs;
         p.argsType = ParamModel.valuesTypeOf(args);
         invocation.argsType = p.argsType;
-        for (int i = 0; i < p.args.length; i++) {
-            Object argi = p.args[i];
-            if (argi instanceof RefsInfo) {
-                RefsInfo aRefs = (RefsInfo) argi;
-                invocation.argsNames.put(i, aRefs);
-            }
-        }
         p.invocationId = invocation.id;
         p.name = ParamModel.INPUTS;
         traceWriter.write(p);

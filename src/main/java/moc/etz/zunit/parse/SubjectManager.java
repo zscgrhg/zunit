@@ -6,8 +6,8 @@ import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 import moc.etz.zunit.instrument.MethodNames;
 import moc.etz.zunit.instrument.TraceUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import moc.etz.zunit.util.LoggerUtil;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -22,7 +22,7 @@ import static moc.etz.zunit.instrument.TraceUtil.shouldIgnore;
 public class SubjectManager {
     public static final SubjectManager instance = new SubjectManager();
     private static final Logger LOGGER
-            = LoggerFactory.getLogger(SubjectManager.class);
+            = LoggerUtil.of(SubjectManager.class);
     public final Map<Class, Map<String, RefsInfo>> SUBJECT_CLASS_REFS = new ConcurrentHashMap<>();
     TestSubjectSelector ss = new DefaultTestSubjectSelectorImpl();
     TraceSelector ts = new DefaultTraceSelectorImpl();

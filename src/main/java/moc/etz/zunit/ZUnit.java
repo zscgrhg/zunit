@@ -8,9 +8,9 @@ import lombok.SneakyThrows;
 import moc.etz.zunit.instrument.BMUtil;
 import moc.etz.zunit.parse.SubjectManager;
 import moc.etz.zunit.trace.InvocationContext;
+import moc.etz.zunit.util.LoggerUtil;
 import org.jboss.byteman.agent.Main;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.net.URL;
 import java.nio.file.Path;
@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 public class ZUnit {
 
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(InvocationContext.class);
+    private static final Logger LOGGER = LoggerUtil.of(InvocationContext.class);
 
     public static final Properties CONFIG = loadConfig();
 

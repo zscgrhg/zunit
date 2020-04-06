@@ -1,9 +1,9 @@
 package moc.etz.zunit.instrument;
 
 import com.alibaba.ttl.threadpool.TtlForkJoinPoolHelper;
+import moc.etz.zunit.util.LoggerUtil;
 import org.jboss.byteman.rule.Rule;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinWorkerThread;
 
 public class TtlHelper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TtlHelper.class);
+    private static final Logger LOGGER = LoggerUtil.of(TtlHelper.class);
     public static final ThreadLocal<Map<String, Integer>> BARRIER = new ThreadLocal<>();
 
 

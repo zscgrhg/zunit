@@ -1,16 +1,16 @@
 package moc.etz.zunit.instrument;
 
 import lombok.Data;
+import moc.etz.zunit.util.LoggerUtil;
 import moc.etz.zunit.util.MustacheUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class BMRuleMustacheModel {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BMRuleMustacheModel.class);
+    private static final Logger LOGGER = LoggerUtil.of(BMRuleMustacheModel.class);
     final List<String> bind = new ArrayList<>();
     final List<String> action = new ArrayList<>();
     String ruleId;

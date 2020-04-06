@@ -4,9 +4,9 @@ import lombok.SneakyThrows;
 import moc.etz.zunit.config.TraceConfig;
 import moc.etz.zunit.instrument.MethodNames;
 import moc.etz.zunit.trace.proxy.ProxyResolver;
+import moc.etz.zunit.util.LoggerUtil;
 import org.jboss.byteman.rule.Rule;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static moc.etz.zunit.util.ClassUtil.resolve;
 
 public class TraceHelper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TraceHelper.class);
+    private static final Logger LOGGER = LoggerUtil.of(TraceHelper.class);
     private static final ProxyResolver RESOLVER = TraceConfig.INSTANCE.getProxyResolver();
     Rule rule;
 

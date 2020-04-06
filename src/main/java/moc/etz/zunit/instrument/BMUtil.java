@@ -7,18 +7,18 @@ import com.sun.jna.platform.win32.Kernel32;
 import com.sun.tools.attach.AgentInitializationException;
 import lombok.SneakyThrows;
 import moc.etz.zunit.util.JsonUtil;
+import moc.etz.zunit.util.LoggerUtil;
 import org.jboss.byteman.agent.install.Install;
 import org.jboss.byteman.agent.submit.ScriptText;
 import org.jboss.byteman.agent.submit.Submit;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class BMUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BMUtil.class);
+    private static final Logger LOGGER = LoggerUtil.of(BMUtil.class);
 
     public static int getPort() {
         return 8848;
