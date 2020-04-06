@@ -3,8 +3,10 @@ package moc.etz.zunit.extension;
 import com.fasterxml.jackson.core.type.TypeReference;
 import groovy.lang.Closure;
 import lombok.SneakyThrows;
+import moc.etz.zunit.parse.RefsInfo;
 import moc.etz.zunit.util.JsonUtil;
 import net.sf.cglib.beans.BeanCopier;
+import org.codehaus.groovy.runtime.NullObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -25,6 +27,10 @@ public class ObjectGroovyMethods {
 
     @SneakyThrows
     public static <V> void copyDirtyPropsTo(V source, V target) {
+        if (Objects.equals(source, target) || source == null || target == null
+                || source instanceof NullObject || target instanceof NullObject || source instanceof RefsInfo) {
+            return;
+        }
         Class<?> targetClass = target.getClass();
         Class<?> sourceClass = source.getClass();
         if (targetClass.isArray()) {

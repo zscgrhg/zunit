@@ -4,6 +4,7 @@ package moc.etz.zunit.parse;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
+import moc.etz.zunit.instrument.MethodNames;
 import moc.etz.zunit.instrument.TraceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static moc.etz.zunit.instrument.MethodNames.normalizeVarargs;
 import static moc.etz.zunit.instrument.TraceUtil.shouldIgnore;
 
 public class SubjectManager {
@@ -37,6 +37,10 @@ public class SubjectManager {
 
     public static String keyOfArgs(String methodSignure, int idx) {
         return methodSignure + "[" + idx + "]";
+    }
+
+    public static boolean isTraced(Class clazz) {
+        return TraceUtil.TRACED.containsKey(clazz) || getInstance().ss.selectTestSubject(clazz) || getInstance().ts.select(clazz);
     }
 
     public static boolean isSubject(Class clazz) {
@@ -60,7 +64,7 @@ public class SubjectManager {
         for (Class clz : classList) {
 
             if (ss.selectTestSubject(clz)) {
-                TraceUtil.traceInvocation(clz);
+                TraceUtil.traceInvocation(clz, true);
                 SUBJECT_CLASS_REFS.putIfAbsent(clz, new HashMap<>());
                 Field[] fields = clz.getDeclaredFields();
 
@@ -70,7 +74,7 @@ public class SubjectManager {
                     obj.setType(RefsInfo.RefType.FIELD);
                     Class<?> type = field.getType();
                     if (ts.select(field) || ts.select(type)) {
-                        TraceUtil.traceInvocation(type);
+                        TraceUtil.traceInvocation(type, ss.selectTestSubject(type));
                     }
                     obj.setDeclaredType(type);
                     obj.setName(field.getName());
@@ -102,12 +106,12 @@ public class SubjectManager {
             obj.setType(RefsInfo.RefType.ARG);
             Class<?> type = param.getType();
             if (ts.select(param)) {
-                TraceUtil.traceInvocation(type);
+                TraceUtil.traceInvocation(type, ss.selectTestSubject(type));
             }
             obj.setDeclaredType(type);
             obj.setName(param.getName());
             obj.setIndex(i);
-            subMap.put(keyOfArgs(normalizeVarargs(method.toGenericString()), i), obj);
+            subMap.put(keyOfArgs(MethodNames.resolveGenericSymbol(method, clz), i), obj);
         }
     }
 }

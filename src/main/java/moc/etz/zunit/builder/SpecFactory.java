@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import lombok.SneakyThrows;
 import moc.etz.zunit.config.TraceConfig;
+import moc.etz.zunit.parse.RefsInfo;
 import moc.etz.zunit.trace.Invocation;
 import moc.etz.zunit.trace.TraceReader;
 import moc.etz.zunit.trace.TraceReaderImpl;
@@ -28,7 +29,7 @@ public class SpecFactory {
     @SneakyThrows
     public static SpecModel build(Long subjectInvocationId) {
         Invocation subjectInvocation = reader.readInvocation(subjectInvocationId);
-        Class clazz = subjectInvocation.getClazz();
+        Class clazz = subjectInvocation.getClazzSource();
         String method = subjectInvocation.getMethod();
         SpecModel specModel = new SpecModel();
         specModel.pkg = clazz.getPackage().getName();
@@ -52,13 +53,13 @@ public class SpecFactory {
 
         if (!children.isEmpty()) {
 
-            Map<String, List<Invocation>> mapInv = new HashMap<>();
+            Map<RefsInfo, List<Invocation>> mapInv = new HashMap<>();
             for (Invocation child : children) {
                 inputs.put(String.valueOf(child.id), buildArgsLine(reader.readInParam(child.id)));
                 JsonNode childOutParam = reader.readOutParam(child.id);
                 outputs.put(String.valueOf(child.id), buildArgsLine(childOutParam));
                 returned.put(String.valueOf(child.id), buildRetLine(childOutParam));
-                String refPath = child.getRefPath();
+                RefsInfo refPath = child.getRefsInfo();
                 mapInv.putIfAbsent(refPath, new ArrayList<>());
                 mapInv.get(refPath).add(child);
             }
@@ -77,7 +78,24 @@ public class SpecFactory {
     }
 
     public static String buildWhen(Invocation invocation) {
-        String action = MustacheUtil.format("def ret=subject.{{0}}(*INPUTS{{1}})", invocation.method, invocation.id);
+        Class[] argsType = invocation.argsType;
+        List<String> argString = new ArrayList<>();
+        for (int i = 0; i < argsType.length; i++) {
+            String sp = (i < argsType.length - 1) ? "," : "";
+            if (RefsInfo.class.isAssignableFrom(argsType[i])) {
+                RefsInfo refsInfo = invocation.argsNames.get(i);
+                if (RefsInfo.RefType.FIELD.equals(refsInfo.type)) {
+                    argString.add(MustacheUtil.format("subject.{{0}}{{1}}", refsInfo.name, sp));
+                } else {
+                    argString.add(MustacheUtil.format("argMockDefs.{{0}}{{1}}", refsInfo.name, sp));
+                }
+
+            } else {
+                argString.add(MustacheUtil.format("INPUTS{{0}}[{{1}}]{{2}}", invocation.id, i, sp));
+            }
+        }
+
+        String action = MustacheUtil.format("def ret=subject.{{0}}({{#1}}{{.}}{{/1}})", invocation.method, argString);
         return action;
     }
 
@@ -87,17 +105,26 @@ public class SpecFactory {
         return MustacheUtil.format("ret == RETURNED{{0}}", invocation.id);
     }
 
-    public static List<String> buildMockBlock(Map.Entry<String, List<Invocation>> invs) {
+    public static List<String> buildMockBlock(Map.Entry<RefsInfo, List<Invocation>> invs) {
         List<String> ret = new ArrayList<>();
         List<Invocation> value = invs.getValue();
         Class clazz = value.get(0).getDeclaredClass();
-        ret.add(MustacheUtil.format("subject.{{0}}=Mock({{1}}){", invs.getKey(), clazz.getName()));
+
+        RefsInfo refsInfo = invs.getKey();
+
+        if (RefsInfo.RefType.FIELD.equals(refsInfo.type)) {
+            ret.add(MustacheUtil.format("subject.{{0}}=Mock({{1}}){", refsInfo.name, clazz.getName()));
+        } else {
+            ret.add(MustacheUtil.format("argMockDefs.{{0}}=Mock({{1}}){", refsInfo.name, clazz.getName()));
+        }
+
         for (Invocation invocation : value) {
             String args = invocation.getSignature().replaceAll("^.*\\((.*?)\\)", "$1");
-            int length = args.split(",").length;
+            String[] argsSplit = args.split(",");
+            int length = argsSplit.length;
             //String argsLine = IntStream.range(0, length).mapToObj(i -> "{p" + i + "-> p" + i + "==INPUTS{{1}}[" + i + "]}").collect(Collectors.joining(","));
             String argsLine = IntStream.range(0, length).mapToObj(i -> "INPUTS{{1}}[" + i + "]").collect(Collectors.joining(","));
-            String newArgsLine = IntStream.range(0, length).mapToObj(i -> "arg" + i + "").collect(Collectors.joining(","));
+            String newArgsLine = IntStream.range(0, length).mapToObj(i -> argsSplit[i] + " arg" + i + "").collect(Collectors.joining(","));
             List<String> copyLine = IntStream.range(0, length)
                     .boxed()
                     .flatMap(i -> {
@@ -120,7 +147,7 @@ public class SpecFactory {
         List<GroovyLine> ret = new ArrayList<>();
         JsonNode returned = paramModel.get("returned");
         JsonNode rgt = paramModel.get("returnedGenericType");
-        ret.addAll(jsonToGroovyMap(1, null, returned, rgt.asText()));
+        ret.addAll(jsonToGroovyMap(1, null, returned, rgt.asText(), null));
         endBlock(ret, null);
         return ret;
     }
@@ -129,11 +156,14 @@ public class SpecFactory {
         List<GroovyLine> ret = new ArrayList<>();
         JsonNode args = paramModel.get("args");
         ArrayNode argValues = (ArrayNode) args;
+        JsonNode at = paramModel.get("argsType");
+        ArrayNode atArr = (ArrayNode) at;
+
         JsonNode agt = paramModel.get("argsGenericType");
         ArrayNode agtArr = (ArrayNode) agt;
         if (argValues != null && argValues.size() > 0) {
             for (int i = 0; i < argValues.size(); i++) {
-                ret.addAll(jsonToGroovyMap(1, null, argValues.get(i), agtArr.get(i).asText()));
+                ret.addAll(jsonToGroovyMap(1, null, argValues.get(i), agtArr.get(i).asText(), atArr.get(i).asText()));
             }
         }
         endBlock(ret, null);
@@ -141,19 +171,19 @@ public class SpecFactory {
     }
 
     private static List<GroovyLine> jsonToGroovyMap(int ident, String name, JsonNode value) {
-        List<GroovyLine> lines = jsonToGroovyMap(ident, name, value, null);
+        List<GroovyLine> lines = jsonToGroovyMap(ident, name, value, null, null);
         return lines;
     }
 
     private static void endBlock(List<GroovyLine> lines, String endChar) {
-        if (lines != null) {
+        if (lines != null && !lines.isEmpty()) {
             GroovyLine groovyLine = lines.get(lines.size() - 1);
             groovyLine.setLineEnd(endChar);
         }
     }
 
     @SneakyThrows
-    public static List<GroovyLine> jsonToGroovyMap(int ident, String name, JsonNode value, String genericSignature) {
+    public static List<GroovyLine> jsonToGroovyMap(int ident, String name, JsonNode value, String genericSignature, String valueType) {
         ident++;
         String identStr = IntStream.range(0, ident).mapToObj(i -> "\t").collect(Collectors.joining());
         List<GroovyLine> defs = new ArrayList<>();
@@ -190,7 +220,9 @@ public class SpecFactory {
         }
         if (defs.size() > 1 && genericSignature != null && !genericSignature.isEmpty()) {
             GroovyLine groovyLine = defs.get(defs.size() - 1);
-            if (genericSignature.contains("<")) {
+            if (RefsInfo.class.getName().equals(valueType)) {
+                groovyLine.tokens = MustacheUtil.format("{{0}} as {{1}}", groovyLine.tokens, RefsInfo.class.getName());
+            } else if (genericSignature.contains("<")) {
                 groovyLine.tokens = MustacheUtil.format("{{0}}.reconstruction(new TypeReference<{{1}}>(){})", groovyLine.tokens, genericSignature);
             } else {
                 groovyLine.tokens = MustacheUtil.format("{{0}} as {{1}}", groovyLine.tokens, genericSignature);

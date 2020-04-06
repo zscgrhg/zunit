@@ -37,13 +37,15 @@ public class TraceHelper {
             invocation.setSignature(names.signature);
             Object thisObject = args[0];
             invocation.setThisObject(thisObject);
+            invocation.setThisObjectSource(thisObject);
             invocation.staticInvoke = thisObject == null;
-            invocation.setClazz(thisObject == null ? names.context : thisObject.getClass());
-            Class c = invocation.clazz;
-            if (RESOLVER.isProxy(thisObject)) {
+            invocation.setClazzThis(thisObject == null ? names.context : thisObject.getClass());
+            Class c = invocation.clazzThis;
+            if (thisObject != null && RESOLVER.isProxy(thisObject)) {
                 Object targetSource = RESOLVER.getTargetSource(thisObject);
                 Class targetClass = RESOLVER.getTargetClass(thisObject);
                 if (targetSource != null) {
+                    invocation.thisObjectSource = targetSource;
                     c = targetSource.getClass();
                 } else if (targetClass != null) {
                     c = targetClass;
@@ -51,6 +53,8 @@ public class TraceHelper {
                     c = RESOLVER.findOwner(thisObject, names.method);
                 }
             }
+            invocation.clazzSource = c;
+            invocation.subject = MethodNames.isTestSubject(invocation.clazzSource, invocation.mid);
             invocation.saveObjectsRef(names.genericSymbol, methodArgs);
             //Method method = c.getMethod(names.name, names.parametersType);
             invocation.genericReturned = resolve(names.method.getGenericReturnType(), c).getTypeName();

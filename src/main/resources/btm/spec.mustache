@@ -14,6 +14,7 @@ class {{className}} extends Specification {
 void verify{{method}}() {
 given:
 {{subjectDecl}}
+def argMockDefs=[:]
 {{#mockBlock}}
     {{.}}
 {{/mockBlock}}

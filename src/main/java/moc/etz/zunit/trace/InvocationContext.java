@@ -7,7 +7,6 @@ import moc.etz.zunit.builder.SpecWriter;
 import moc.etz.zunit.config.TraceConfig;
 import moc.etz.zunit.instrument.MethodNames;
 import moc.etz.zunit.parse.RefsInfo;
-import moc.etz.zunit.parse.SubjectManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,13 +88,18 @@ public class InvocationContext {
             STAGED.set(prevTTL);
         }
 
-        invocation.subject = SubjectManager.isSubject(invocation.getClazz());
+
         Invocation prev = PREVIOUS.get();
 
         if (prev != null) {
             invocation.parent = prev;
-            RefsInfo refsInfo = prev.refs.get(invocation.thisObject);
-            invocation.refPath = refsInfo.name;
+            if (prev.thisObjectSource == invocation.thisObjectSource) {
+                assert prev.threadId == Thread.currentThread().getId();
+                int andIncrement = prev.stackCounter.getAndIncrement();
+                LOGGER.debug("stackCounter ++ :" + andIncrement);
+            }
+            RefsInfo refsInfo = prev.refs.get(invocation.thisObjectSource);
+            invocation.refsInfo = refsInfo;
             invocation.declaredClass = refsInfo.declaredType;
             prev.getChildren().add(invocation);
         }
@@ -104,9 +108,27 @@ public class InvocationContext {
         map.put(invocation.id, invocation);
         MethodNames names = MethodNames.METHOD_NAMES_MAP.get(invocation.mid);
         ParamModel p = new ParamModel();
+        for (int i = 0; i < args.length; i++) {
+            Object arg = args[i];
+            if (arg != null) {
+                Object argSource = Invocation.resolveSource(arg);
+                RefsInfo argRefPath = invocation.refs.get(argSource);
+                if (argRefPath != null) {
+                    args[i] = argRefPath;
+                }
+            }
+        }
         p.args = args;
         p.argsGenericType = invocation.genericArgs;
         p.argsType = ParamModel.valuesTypeOf(args);
+        invocation.argsType = p.argsType;
+        for (int i = 0; i < p.args.length; i++) {
+            Object argi = p.args[i];
+            if (argi instanceof RefsInfo) {
+                RefsInfo aRefs = (RefsInfo) argi;
+                invocation.argsNames.put(i, aRefs);
+            }
+        }
         p.invocationId = invocation.id;
         p.name = ParamModel.INPUTS;
         traceWriter.write(p);
@@ -114,6 +136,13 @@ public class InvocationContext {
 
     public void pop(Object[] args, Object returnValue, Throwable exception) {
         Stack<Invocation> stack = STACK_THREAD_LOCAL.get();
+        Invocation last = stack.lastElement();
+        int stackCounter = last.stackCounter.decrementAndGet();
+        if (stackCounter > 0) {
+            assert last.threadId == Thread.currentThread().getId();
+            LOGGER.debug("stackCounter -- :" + stackCounter);
+            return;
+        }
         Invocation pop = stack.pop();
         MethodNames names = MethodNames.METHOD_NAMES_MAP.get(pop.mid);
         ParamModel p = new ParamModel();

@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TraceUtil {
-    private static final Map<Class, Boolean> TRACED = new ConcurrentHashMap<>();
+    public static final Map<Class, Boolean> TRACED = new ConcurrentHashMap<>();
 
 
     public static boolean shouldIgnore(Method method) {
@@ -24,7 +24,7 @@ public class TraceUtil {
                 || pkg.startsWith("sun.");
     }
 
-    public static void traceInvocation(Class clazz) {
+    public static void traceInvocation(Class clazz, boolean isTSClass) {
 
         Boolean exist = TRACED.putIfAbsent(clazz, true);
         if (exist != null) {
@@ -36,7 +36,7 @@ public class TraceUtil {
             if (shouldIgnore(method)) {
                 continue;
             }
-            MethodNames names = MethodNames.build(method, clazz);
+            MethodNames names = MethodNames.build(method, clazz, isTSClass);
             {
 
                 BMRuleMustacheModel model = BMRuleMustacheModel.atEntry(names, true);
