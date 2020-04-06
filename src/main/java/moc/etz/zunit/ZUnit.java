@@ -1,6 +1,8 @@
 package moc.etz.zunit;
 
 import com.alibaba.ttl.threadpool.agent.TtlAgent;
+import com.sun.jna.platform.win32.Kernel32;
+import com.sun.tools.attach.AgentInitializationException;
 import com.sun.tools.attach.VirtualMachine;
 import lombok.SneakyThrows;
 import moc.etz.zunit.instrument.BMUtil;
@@ -10,6 +12,7 @@ import org.jboss.byteman.agent.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
@@ -31,11 +34,16 @@ public class ZUnit {
 
 
     public synchronized static void loadAgent() throws Exception {
+
+        URL jnaLocation = Kernel32.class.getProtectionDomain().getCodeSource().getLocation();
+        String path = Paths.get(jnaLocation.toURI()).toString();
+        System.setProperty("jna.nosys", "true");
+        System.setProperty("jna.boot.library.path", path);
         if (Main.firstTime) {
             BMUtil.loadAgent();
         }
-        if (!TtlAgent.isTtlAgentLoaded()) {
-            loadAlitababa();
+        if (TtlAgent.firstLoad) {
+            loadTtlAgent();
         }
 
 
@@ -46,10 +54,14 @@ public class ZUnit {
     }
 
     @SneakyThrows
-    public static void loadAlitababa() {
-        VirtualMachine jvm = VirtualMachine.attach(String.valueOf(BMUtil.getPid()));
-        Path agentPath = Paths.get(TtlAgent.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-        jvm.loadAgent(agentPath.toString());
+    public static void loadTtlAgent() {
+        try {
+            VirtualMachine jvm = VirtualMachine.attach(String.valueOf(BMUtil.getPid()));
+            Path agentPath = Paths.get(TtlAgent.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            jvm.loadAgent(agentPath.toString());
+        } catch (AgentInitializationException e) {
+            // this probably indicates that the agent is already installed
+        }
     }
 
 }

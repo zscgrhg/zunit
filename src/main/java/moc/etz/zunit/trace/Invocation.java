@@ -39,12 +39,13 @@ public class Invocation {
     public final List<Invocation> children = new CopyOnWriteArrayList<>();
     @JsonIgnore
     public Object thisObject;
+    @JsonIgnore
+    public Object thisObjectSource;
     public final Map<Integer, RefsInfo> argsNames = new HashMap<>();
     public String method;
     public String signature;
     public final AtomicInteger stackCounter = new AtomicInteger(1);
-    @JsonIgnore
-    public Object thisObjectSource;
+
     public RefsInfo refsInfo;
     public Class declaredClass;
     public boolean staticInvoke = false;

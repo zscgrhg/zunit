@@ -21,7 +21,7 @@ public class ZUnitWatcher extends TestWatcher implements SpecWriter {
             LOGGER.debug("load alitababa");
             try {
                 ZUnit.loadAgent();
-                ZUnit.loadAlitababa();
+                ZUnit.loadTtlAgent();
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);
