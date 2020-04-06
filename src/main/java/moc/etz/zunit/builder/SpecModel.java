@@ -16,6 +16,7 @@ public class SpecModel {
     String subject;
     String method;
     String subjectDecl;
+    boolean mockArgs = false;
     List<String> mockBlock;
     String actionDecl = "1==1";
     String assertDecl = "1==1";

@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import moc.etz.zunit.builder.SpecWriter;
 import moc.etz.zunit.config.TraceConfig;
-import moc.etz.zunit.instrument.MethodNames;
 import moc.etz.zunit.parse.RefsInfo;
 import moc.etz.zunit.util.LoggerUtil;
 import shade.zunit.ch.qos.logback.classic.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -28,7 +28,7 @@ public class InvocationContext {
     public final static ThreadLocal<Invocation> STAGED = new ThreadLocal<>();
     public final static ThreadLocal<InvocationContext> CONTEXT = new ThreadLocal<>();
     public final static ThreadLocal<Stack<Invocation>> STACK_THREAD_LOCAL = new ThreadLocal<>();
-
+    public final static ThreadLocal<Stack<Object[]>> ARGS_STACK = new ThreadLocal<>();
     public final AtomicInteger ENTRY_COUNTER = new AtomicInteger(Integer.MIN_VALUE);
     public final AtomicInteger EXIT_COUNTER = new AtomicInteger(Integer.MAX_VALUE);
 
@@ -75,12 +75,20 @@ public class InvocationContext {
         return success;
     }
 
-    public void push(Invocation invocation, Object[] args) {
+    public void push(Invocation invocation, Object[] originArgs) {
         Stack<Invocation> stack = STACK_THREAD_LOCAL.get();
         if (stack == null) {
             stack = new Stack<>();
             STACK_THREAD_LOCAL.set(stack);
         }
+        Stack<Object[]> argsStack = ARGS_STACK.get();
+        if (argsStack == null) {
+            argsStack = new Stack<>();
+            ARGS_STACK.set(argsStack);
+        }
+        Object[] argsCopy = Arrays.copyOf(originArgs, originArgs.length);
+
+
         Invocation prevTTL = PREVIOUS.get();
         if (prevTTL != null && !checkTheadId(prevTTL) && stack.isEmpty()) {
             //in spawned thread
@@ -95,7 +103,7 @@ public class InvocationContext {
             invocation.parent = prev;
             if (prev.thisObjectSource == invocation.thisObjectSource) {
                 assert prev.threadId == Thread.currentThread().getId();
-                int andIncrement = prev.stackCounter.getAndIncrement();
+                int andIncrement = prev.stackCounter.incrementAndGet();
                 LOGGER.debug("stackCounter ++ :" + andIncrement);
                 return;
             }
@@ -105,45 +113,47 @@ public class InvocationContext {
             prev.getChildren().add(invocation);
         }
         stack.push(invocation);
+        argsStack.push(argsCopy);
         PREVIOUS.set(invocation);
         map.put(invocation.id, invocation);
-        MethodNames names = MethodNames.METHOD_NAMES_MAP.get(invocation.mid);
+        //MethodNames names = MethodNames.METHOD_NAMES_MAP.get(invocation.mid);
         ParamModel p = new ParamModel();
-        for (int i = 0; i < args.length; i++) {
-            Object arg = args[i];
+        for (int i = 0; i < argsCopy.length; i++) {
+            Object arg = argsCopy[i];
             if (arg != null) {
                 Object argSource = Invocation.resolveSource(arg);
                 RefsInfo argRefInfo = invocation.refs.get(argSource);
                 if (argRefInfo != null) {
-                    args[i] = argRefInfo;
+                    argsCopy[i] = argRefInfo;
                     invocation.argsNames.put(i, argRefInfo);
                 }
             }
         }
-        p.args = args;
+        p.args = argsCopy;
         p.argsGenericType = invocation.genericArgs;
-        p.argsType = ParamModel.valuesTypeOf(args);
+        p.argsType = ParamModel.valuesTypeOf(argsCopy);
         invocation.argsType = p.argsType;
         p.invocationId = invocation.id;
         p.name = ParamModel.INPUTS;
         traceWriter.write(p);
     }
 
-    public void pop(Object[] args, Object returnValue, Throwable exception) {
+    public void pop(Object returnValue, Throwable exception) {
         Stack<Invocation> stack = STACK_THREAD_LOCAL.get();
         Invocation last = stack.lastElement();
         int stackCounter = last.stackCounter.decrementAndGet();
+        LOGGER.debug("stackCounter -- :" + stackCounter);
         if (stackCounter > 0) {
             assert last.threadId == Thread.currentThread().getId();
-            LOGGER.debug("stackCounter -- :" + stackCounter);
             return;
         }
         Invocation pop = stack.pop();
-        MethodNames names = MethodNames.METHOD_NAMES_MAP.get(pop.mid);
+        Object[] originArgs = ARGS_STACK.get().pop();
+        //MethodNames names = MethodNames.METHOD_NAMES_MAP.get(pop.mid);
         ParamModel p = new ParamModel();
         p.invocationId = pop.id;
-        p.args = args;
-        p.argsType = ParamModel.valuesTypeOf(args);
+        p.args = originArgs;
+        p.argsType = ParamModel.valuesTypeOf(originArgs);
         p.argsGenericType = pop.genericArgs;
         p.returned = returnValue;
         p.returnedType = ParamModel.typeOf(p.returned);

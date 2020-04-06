@@ -17,8 +17,8 @@ import java.util.Properties;
 
 
 public class TraceConfigImpl implements TraceConfig {
-    public static final File workspace = new File("data").toPath().resolve(ymdHmsOfNow()).toFile();
-    public static final File specDir = Paths.get("src\\test\\groovy\\")
+    public static final File workspace = new File(getBaseDir()).toPath().resolve("data").resolve(ymdHmsOfNow()).toFile();
+    public static final File specDir = Paths.get(getBaseDir()).resolve("src\\test\\groovy\\")
             .toFile();
 
     static {
@@ -37,6 +37,10 @@ public class TraceConfigImpl implements TraceConfig {
         p.load(TraceWriterImpl.class.getClassLoader().getResourceAsStream("git.properties"));
         return p.getProperty("git.commit.id.abbrev") + "/"
                 + new SimpleDateFormat("yyyy-MM-dd--HH-mm-ss").format(new Date());
+    }
+
+    public static String getBaseDir() {
+        return Optional.ofNullable(ZUnit.CONFIG.getProperty("zunit.dir.base")).orElse("");
     }
 
     @Override

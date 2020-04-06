@@ -8,7 +8,9 @@ import moc.etz.zunit.parse.RefsInfo;
 import moc.etz.zunit.trace.Invocation;
 import moc.etz.zunit.trace.TraceReader;
 import moc.etz.zunit.trace.TraceReaderImpl;
+import moc.etz.zunit.util.LoggerUtil;
 import moc.etz.zunit.util.MustacheUtil;
+import shade.zunit.ch.qos.logback.classic.Logger;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -22,6 +24,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class SpecFactory {
+    private static final Logger LOGGER = LoggerUtil.of(SpecFactory.class);
     public static final AtomicLong BUILD_INCR = new AtomicLong(1);
     public static final String FN = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
     private static TraceReader reader = new TraceReaderImpl();
@@ -63,7 +66,7 @@ public class SpecFactory {
                 mapInv.putIfAbsent(refPath, new ArrayList<>());
                 mapInv.get(refPath).add(child);
             }
-
+            specModel.mockArgs = mapInv.keySet().stream().anyMatch(ref -> RefsInfo.RefType.ARG.equals(ref.type));
             List<String> mockBlock = mapInv.entrySet().stream().flatMap(e -> buildMockBlock(e).stream()).collect(Collectors.toList());
 
             specModel.mockBlock = mockBlock;
@@ -201,7 +204,7 @@ public class SpecFactory {
         } else if (value == null) {
             defs.add(new GroovyLine(identStr, null));
         } else if (value.isTextual()) {
-            defs.add(new GroovyLine(identStr, MustacheUtil.format("{{#0}}{{0}}:{{/0}}'{{1}}'", name, value.asText())));
+            defs.add(new GroovyLine(identStr, MustacheUtil.format("{{#0}}{{0}}:{{/0}}'''{{1}}'''", name, value.asText())));
         } else if (value.isValueNode()) {
             defs.add(new GroovyLine(identStr, MustacheUtil.format("{{#0}}{{0}}:{{/0}}{{1}}", name, value.asText())));
         } else {
@@ -248,7 +251,9 @@ public class SpecFactory {
         model.imports = true;
         model.className = model.fileName + model.className;
         String specText = MustacheUtil.render("btm/spec.mustache", model);
-        Files.write(pkg.resolve(model.className + ".groovy"),
+        Path resolve = pkg.resolve(model.className + ".groovy");
+        LOGGER.debug("write :" + resolve.toString());
+        Files.write(resolve,
                 specText.getBytes("UTF-8"), StandardOpenOption.CREATE);
     }
 }

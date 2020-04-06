@@ -68,7 +68,7 @@ public class TraceHelper {
         InvocationContext context = InvocationContext.getCurrent(false);
         if (context != null && context.canPop()) {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
-            context.pop(methodArgs, null, null);
+            context.pop(null, null);
         }
     }
 
@@ -77,16 +77,16 @@ public class TraceHelper {
         InvocationContext context = InvocationContext.getCurrent(false);
         if (context != null && context.canPop()) {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
-            context.pop(methodArgs, ret, null);
+            context.pop(ret, null);
         }
     }
 
     public void atException(Long mid, Object[] args, Throwable t) {
-        LOGGER.debug(mid + ",trigger by " + rule.getName());
+        LOGGER.error(mid + ",trigger by " + rule.getName(), t);
         InvocationContext context = InvocationContext.getCurrent(false);
         if (context != null && context.canPop()) {
             Object[] methodArgs = Stream.of(args).skip(1).toArray();
-            context.pop(methodArgs, null, t);
+            context.pop(null, t);
         }
     }
 
